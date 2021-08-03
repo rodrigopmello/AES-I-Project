@@ -27,7 +27,8 @@ import carla
 def sensor_callback(sensor_data, sensor_name):
 
     print("sensor data", sensor_data.raw_data)
-    sensor_data.save_to_disk("pic1.jpeg")
+    ts = str(time.time())
+    sensor_data.save_to_disk(ts+".jpeg")
 
     
     
@@ -36,20 +37,37 @@ def main():
     client = carla.Client('192.168.0.14', 2000)
     client.set_timeout(2.0)
     world = client.get_world()
-    spawn_points = world.get_map().get_spawn_points()
-    print('spawn points', spawn_points)
-
+    
     blueprint_library = world.get_blueprint_library()
     
+    actors_list = world.get_actors()
 
+    
+    car = actors_list[40]
+    traffic_light = actors_list[47]
+    location = traffic_light.get_location() #carla.Location
+    print(location)
+    
     cam_bp = blueprint_library.find('sensor.camera.rgb')
     cam_bp.set_attribute('image_size_x', '1920')
     cam_bp.set_attribute('image_size_y', '1080')
-    cam_bp.set_attribute('fov', '110')
+    cam_bp.set_attribute('fov', '80')
+
+    custom_sensor = blueprint_library.find('sensor.custom')
+    custom_sensor.set_attribute('', '')
+
+
+    #id=47 0 check if traffic.traffic_light actor.type_id
     
-    x = 36.346519470214844
-    y = 4.937343120574951
-    z = 1.0885553359985352
+    # x = 36.346519470214844
+    # y = 4.937343120574951
+    # z = 1.0885553359985352
+    x = -15.863662719726562
+    y = 128.4626922607422
+    z = 6.372709274291992
+    # -15.863662719726562,128.4626922607422,6.372709274291992
+    # cam01 = world.spawn_actor(cam_bp, traffic_light.get_transform())
+    custom_sensor01 = world.spawn_actor(custom_sensor, car.get_transform())
     cam01 = world.spawn_actor(cam_bp, carla.Transform(carla.Location(x=x, y=y, z=z)))
     cam01.listen(lambda data: sensor_callback(data, "camera01"))
 	
