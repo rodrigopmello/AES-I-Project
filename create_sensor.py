@@ -34,7 +34,7 @@ def sensor_callback(sensor_data, sensor_name):
     
 
 def main():
-    client = carla.Client('192.168.0.14', 2000)
+    client = carla.Client('tcp://4.tcp.ngrok.io:11706', 2000)
     client.set_timeout(2.0)
     world = client.get_world()
     
