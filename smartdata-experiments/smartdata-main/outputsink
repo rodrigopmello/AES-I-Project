@@ -1,0 +1,217 @@
+HeCoPS::HeCoPS()
+Diffie_Hellman::generate_keypair()
+Diffie_Hellman Private: [3596950572, 2802067423, 3554416254, 12345]
+Diffie_Hellman Base Point: {x=[2771147654, 203972732, 2341051181, 371193682],y=[3723328131, 3224216210, 1538255635, 3478833209],z=[1, 0, 0, 0]}
+Diffie_Hellman Public: {x=[3081183073, 3902741774, 4269429007, 1713837598],y=[1109269789, 2280997654, 3706347121, 3658402919],z=[1, 0, 0, 0]}
+Data_Observed() => 0x5664b2a8
+Data_Observed() => 0x5664b298
+SmartData Test
+TSTP::init()
+Data_Observed() => 0x585f0b80
+UDPNIC()
+UDPNIC::address(addr=0:0:0:0:0:0)
+UDPNIC::reconfigure(c=0x585f0c34)
+UDPNIC::reconfigure(c=0x585f0c34)
+Data_Observer() => 0x585f4aa0
+TSTP(nic=0x585f0b80)
+Data_Observed::attach(obs=0x585f4aa0,cond=33793)
+Data_Observer() => 0x585f4ac0
+TSTP::Security()
+TSTP::Security:uuid=[208,74,95,88,0,0,0,0,0,0,0,0,0,0,0,0]
+AES::encrypt(data=0x5664b180,key=0x5664b180,result=0x5664b170receive_thread()
+
+AES::encrypt:data = {208,74,95,88,0,0,0,0,0,0,0,0,0,0,0,0}
+AES::encrypt:key = {208,74,95,88,0,0,0,0,0,0,0,0,0,0,0,0}
+AES::encrypt:result = {224,39,162,105,28,86,3,227,73,68,245,241,105,2,17,12}
+Data_Observed::attach(obs=0x585f4ac0)
+Data_Observer() => 0x585f4af0
+TSTP::Locator()
+Data_Observed::attach(obs=0x585f4af0)
+TSTP::Locator:here=(0,0,0)[sink]
+Data_Observer() => 0x585f4b00
+TSTP::Timekeeper()
+TSTP::Timekeeper:timer accuracy = UDPNIC::configuration()
+1 ppb
+TSTP::Timekeeper:timer frequency = UDPNIC::configuration()
+1000000 Hz
+TSTP::Timekeeper:maximum drift = 500000 us
+TSTP::Timekeeper:sync period = UDPNIC::configuration()
+UDPNIC::configuration()
+500000000000 us
+Data_Observed::attach(obs=0x585f4b00)
+Data_Observer() => 0x585f4b10
+TSTP::Router()
+Data_Observed::attach(obs=0x585f4b10)
+Data_Observer() => 0x585f4b20
+TSTP::Manager()
+Data_Observed::attach(obs=0x585f4b20)
+Sizes:
+  SmartData::Unit:           4
+  SmartData::Value<SI|I32>:  4
+  SmartData::Value<SI|I64>:  8
+  SmartData::Value<SI|F32>:  4
+  SmartData::Value<SI|D64>:  8
+  SmartData::Spacetime:      12
+  SmartData::Space:          4
+  SmartData::Global_Space:   12
+  SmartData::Time:           8
+  SmartData::Region:         20
+  SmartData::Header:         36
+  SmartData::Interest:       68
+  SmartData::Response:       44
+  SmartData::Command:        57
+  SmartData::Control:        45
+  TSTP::Header:              38
+  TSTP::Packet:              1500
+I'm the sink!
+UDPNIC::statistics()
+UDPNIC::configuration()
+UDPNIC::statistics()
+UDPNIC::configuration()
+Observed() => 0xffc9c3e0
+Data_Observer() => 0xffc9c3f0
+SmartData[I](r={{c=(0,0,0),r=100},t0=40935718180314,t1=40935733173878},d=0,x=10000000,m=SGL,err=0,p=0)=>0xffc9c3e0
+Data_Observed::attach(obs=0xffc9c3f0,cond={D:l=8191})
+SmartData[I]::process(op=ANN,v=0)
+UDPNIC::alloc(s=UDPNIC::address()
+0:0:0:0:0:0,d=ff:ff:ff:ff:ff:ff,p=0x8401,on=0,al=0,ld=72)
+SmartData[I]::process:msg={h={INT:ANN:SGL,err=0,ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=0},u={D:l=8191},d=0,lh={(0,0,0),t=0}},ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=0},u={D:l=8191},d=0,lh={(0,0,0),t=0}},r={{c=(0,0,0),r=100},t0=40935718180314,t1=40935733173878},x=10000000,p=0}
+TSTP::send(buf=0x585f4b30)
+TSTP::marshal(buf=0x585f4b30)
+TSTP::Manager::marshal(buf=0x585f4b30)
+TSTP::Router::marshal(buf=0x585f4b30)
+TSTP::Locator::marshal(buf=0x585f4b30)
+UDPNIC::statistics()
+UDPNIC::configuration()
+UDPNIC::statistics()
+UDPNIC::configuration()
+TSTP::Timekeeper::marshal(buf=0x585f4b30)
+UDPNIC::statistics()
+UDPNIC::configuration()
+UDPNIC::statistics()
+UDPNIC::configuration()
+TSTP::Security::marshal(buf=0x585f4b30)
+TSTP::marshal:packet={h={INT:ANN:SGL,err=0,ver=0,tr=1,sc=0,lc=0,o={(0,0,0),t=40935718573904},u={D:l=8191},d=0,lh={(0,0,0),t=40935718563236}},ver=0,tr=1,sc=0,lc=0,o={(0,0,0),t=40935718573904},u={D:l=8191},d=0,lh={(0,0,0),t=40935718563236}},r={{c=(0,0,0),r=100},t0=40935718180314,t1=40935733173878},x=10000000,p=0}}
+UDPNIC::send(buf=0x585f4b30,frame=0x585f4b30 => {h={d=0:0:0:0:0:0,s=0:0:0:0:0:0,p=0},d=0x585f4b3e}
+UDPNIC::address()
+UDPNIC::send(s=UDPNIC::address()
+0:0:0:0:0:0,d=0:0:0:0:0:0,p=0x800,d=0x585f5138,s=72)
+sendto size=72, data=0x585f5138
+SmartData[I]::this=0xffc9c3e0=>{INT:ED:SGL,r={{c=(0,0,0),r=100},t0=40935718180314,t1=40935733173878},d=0,err=0,x=10000000,res={not set}}}
+My coordinates are (0,0,0)
+The time now is UDPNIC::statistics()
+UDPNIC::configuration()
+40935719507400
+I'm interested on 536870911
+I'll wait for data of this kind for 10 seconds...
+a=SmartData[I]::operator Value()[v=0]
+UDPNIC::statistics()
+UDPNIC::configuration()
+SmartData[I]::value(this=0xffc9c3e0,t=10000001,v=0) => expired!
+0
+dummy data received - problem below!
+a=SmartData[I]::operator Value()[v=0]
+UDPNIC::statistics()
+UDPNIC::configuration()
+SmartData[I]::value(this=0xffc9c3e0,t=10000001,v=0) => expired!
+0
+a=SmartData[I]::operator Value()[v=0]
+UDPNIC::statistics()
+UDPNIC::configuration()
+SmartData[I]::value(this=0xffc9c3e0,t=10000001,v=0) => expired!
+0
+a=SmartData[I]::operator Value()[v=0]
+UDPNIC::statistics()
+UDPNIC::configuration()
+SmartData[I]::value(this=0xffc9c3e0,t=10000001,v=0) => expired!
+0
+a=SmartData[I]::operator Value()[v=0]
+UDPNIC::statistics()
+UDPNIC::configuration()
+SmartData[I]::value(this=0xffc9c3e0,t=10000001,v=0) => expired!
+0
+a=SmartData[I]::operator Value()[v=0]
+UDPNIC::statistics()
+UDPNIC::configuration()
+SmartData[I]::value(this=0xffc9c3e0,t=10000001,v=0) => expired!
+0
+a=SmartData[I]::operator Value()[v=0]
+UDPNIC::statistics()
+UDPNIC::configuration()
+SmartData[I]::value(this=0xffc9c3e0,t=10000001,v=0) => expired!
+0
+a=SmartData[I]::operator Value()[v=0]
+UDPNIC::statistics()
+UDPNIC::configuration()
+SmartData[I]::value(this=0xffc9c3e0,t=10000001,v=0) => expired!
+0
+a=SmartData[I]::operator Value()[v=0]
+UDPNIC::statistics()
+UDPNIC::configuration()
+SmartData[I]::value(this=0xffc9c3e0,t=10000001,v=0) => expired!
+0
+a=SmartData[I]::operator Value()[v=0]
+UDPNIC::statistics()
+UDPNIC::configuration()
+SmartData[I]::value(this=0xffc9c3e0,t=10000001,v=0) => expired!
+0
+a=SmartData[I]::operator Value()[v=0]
+UDPNIC::statistics()
+UDPNIC::configuration()
+SmartData[I]::value(this=0xffc9c3e0,t=10000001,v=0) => expired!
+0
+dummy data received - problem below!
+a=SmartData[I]::operator Value()[v=0]
+UDPNIC::statistics()
+UDPNIC::configuration()
+SmartData[I]::value(this=0xffc9c3e0,t=10000001,v=0) => expired!
+0
+a=SmartData[I]::operator Value()[v=0]
+UDPNIC::statistics()
+UDPNIC::configuration()
+SmartData[I]::value(this=0xffc9c3e0,t=10000001,v=0) => expired!
+0
+a=SmartData[I]::operator Value()[v=0]
+UDPNIC::statistics()
+UDPNIC::configuration()
+SmartData[I]::value(this=0xffc9c3e0,t=10000001,v=0) => expired!
+0
+a=SmartData[I]::operator Value()[v=0]
+UDPNIC::statistics()
+UDPNIC::configuration()
+SmartData[I]::value(this=0xffc9c3e0,t=10000001,v=0) => expired!
+0
+done!
+~SmartData[I](this=0xffc9c3e0)
+SmartData[I]::process(op=SUP,v=0)
+UDPNIC::alloc(s=UDPNIC::address()
+0:0:0:0:0:0,d=ff:ff:ff:ff:ff:ff,p=0x8401,on=0,al=0,ld=72)
+SmartData[I]::process:msg={h={INT:ANN:ALL,err=0,ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=0},u={D:l=8191},d=0,lh={(0,0,0),t=0}},ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=0},u={D:l=8191},d=0,lh={(0,0,0),t=0}},r={{c=(0,0,0),r=100},t0=40935718180314,t1=40935733173878},x=10000000,p=0}
+TSTP::send(buf=0x585f5150)
+TSTP::marshal(buf=0x585f5150)
+TSTP::Manager::marshal(buf=0x585f5150)
+TSTP::Router::marshal(buf=0x585f5150)
+TSTP::Locator::marshal(buf=0x585f5150)
+UDPNIC::statistics()
+UDPNIC::configuration()
+UDPNIC::statistics()
+UDPNIC::configuration()
+TSTP::Timekeeper::marshal(buf=0x585f5150)
+UDPNIC::statistics()
+UDPNIC::configuration()
+UDPNIC::statistics()
+UDPNIC::configuration()
+TSTP::Security::marshal(buf=0x585f5150)
+TSTP::marshal:packet={h={INT:ANN:ALL,err=0,ver=0,tr=1,sc=0,lc=0,o={(0,0,0),t=40989728255708},u={D:l=8191},d=0,lh={(0,0,0),t=40989728244300}},ver=0,tr=1,sc=0,lc=0,o={(0,0,0),t=40989728255708},u={D:l=8191},d=0,lh={(0,0,0),t=40989728244300}},r={{c=(0,0,0),r=100},t0=40935718180314,t1=40935733173878},x=10000000,p=0}}
+UDPNIC::send(buf=0x585f5150,frame=0x585f5150 => {h={d=0:0:0:0:0:0,s=0:0:0:0:0:0,p=0},d=0x585f515e}
+UDPNIC::address()
+UDPNIC::send(s=UDPNIC::address()
+0:0:0:0:0:0,d=0:0:0:0:0:0,p=0x800,d=0x585f5758,s=72)
+sendto size=72, data=0x585f5758
+Data_Observed::detach(obs=0xffc9c3f0,cond={D:l=8191})
+~Data_Observer(this=0xffc9c3f0)
+~Observed(this=0xffc9c3e0)
+Bye!
+~Data_Observed(this=0x5664b298)
+~Data_Observed(this=0x5664b2a8)
+HeCoPS::~HeCoPS()

@@ -8,7 +8,7 @@
 
 static const int ITERATIONS = 10;
 
-#define Delay sleep
+#define Delay usleep
 
 // This is not good, but it will work...
 unsigned int globalCoord = 1;
@@ -42,9 +42,10 @@ int main(int argc, char* argv[])
 		Usage();
 		return -1;
 	}
-	
-	TSTP::init();	
-	cout << "Sizes:" << endl;	
+
+	TSTP::init();
+
+	cout << "Sizes:" << endl;
 	cout << "  SmartData::Unit:           " << sizeof(SmartData::Unit) << endl;
 	cout << "  SmartData::Value<SI|I32>:  " << sizeof(SmartData::Value<SmartData::Unit::SI | SmartData::Unit::I32>) << endl;
 	cout << "  SmartData::Value<SI|I64>:  " << sizeof(SmartData::Value<SmartData::Unit::SI | SmartData::Unit::I64>) << endl;
@@ -59,7 +60,7 @@ int main(int argc, char* argv[])
 	cout << "  SmartData::Interest:       " << sizeof(SmartData::Interest) << endl;
 	cout << "  SmartData::Response:       " << sizeof(SmartData::Response) << endl;
 	cout << "  SmartData::Command:        " << sizeof(SmartData::Command) << endl;
-	cout << "  SmartData::Control:        " << sizeof(SmartData::Control) << endl;	
+	cout << "  SmartData::Control:        " << sizeof(SmartData::Control) << endl;
 	cout << "  TSTP::Header:              " << sizeof(TSTP::Header) << endl;
 	cout << "  TSTP::Packet:              " << sizeof(TSTP::Packet) << endl;
 
@@ -82,15 +83,13 @@ void Usage()
 	cout << "  mode: sink or node" << endl;
 }
 
-
 void sink()
 {
 	cout << "I'm the sink!" << endl;
-	cout << "current time " << Antigravity::now() << endl;
-	cout << "expiry time " << Antigravity::now() + (ITERATIONS + 5) * 1000 << endl;	
-	Antigravity_Proxy a(Antigravity::Region(0, 0, 0, 100, Antigravity::now(), Antigravity::now() + (ITERATIONS + 500) * 100), 10000000);
+
+	Antigravity_Proxy a(Antigravity::Region(0, 0, 0, 100, Antigravity::now(), Antigravity::now() + (ITERATIONS + 5) * 1000000), 10000000);
 	//    Smart_Key_Proxy d(Smart_Key::Region((0, 0, 0), 100, Smart_Key::now(), Smart_Key::now()+10000000), 10000000);
-	
+
 	cout << "My coordinates are " << a.here() << endl;
 	cout << "The time now is " << a.now() << endl;
 
@@ -98,7 +97,7 @@ void sink()
 	cout << "I'll wait for data of this kind for " << ITERATIONS << " seconds..." << endl;
 	for (int i = 0; i < ITERATIONS + 5; i++) {
 		cout << "a=" << a << endl;
-		Delay(5);
+		Delay(1000000);
 	}
 	cout << "done!" << endl;
 }
@@ -107,7 +106,7 @@ void node()
 {
 	cout << "I'm a node!" << endl;
 
-	Antigravity a(0, 1000000, SmartData::ALL);
+	Antigravity a(0, 1000000, SmartData::ADVERTISED);
 	//    Antigravity b(0, 10000000, Antigravity::ADVERTISED);
 	//    Antigravity c(0, 1000000, Antigravity::COMMANDED);
 
@@ -127,11 +126,12 @@ void node()
 	for (int i = 0; i < ITERATIONS; i++) {
 		a = i;
 		//        b = i * 2;
-		//        c = i * 3;		
+		//        c = i * 3;
+		//        db<TSTP>(TRC) << "a=" << a << endl;
 		cout << "a=" << a << endl;
 		//        cout << "b=" << b << endl;
 		//        db<TSTP>(TRC) << "c=" << c << endl;
-		Delay(5);
+		Delay(1000000);
 	}
 	cout << "done!" << endl;
 }

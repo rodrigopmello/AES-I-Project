@@ -6,7 +6,7 @@ if(COMMAND cmake_policy)
 endif(COMMAND cmake_policy)
 
 if(NOT CMAKE_BUILD_TYPE)
-	set(CMAKE_BUILD_TYPE "Debug" CACHE STRING "Valid values: Release, Debug" FORCE)
+	set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Valid values: Release, Debug" FORCE)
 endif(NOT CMAKE_BUILD_TYPE)
 
 ADD_DEFINITIONS(-D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64)

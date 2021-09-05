@@ -1,9 +1,9 @@
 #pragma once
 
+
 #ifdef htons
 #undef htons
 #endif
-
 
 // EPOS CPU Mediator Common Package
 
@@ -183,5 +183,3 @@ inline T align128(const T & addr) { return (addr + 15) & ~15U; }
 #if defined(__CPU_H) && !defined(__cpu_common_only__)
 #include __CPU_H
 #endif
-
-

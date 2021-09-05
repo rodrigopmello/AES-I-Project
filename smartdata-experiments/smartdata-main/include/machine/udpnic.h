@@ -16,7 +16,7 @@ class UDPNIC : public NIC<Ethernet>
 private:
 	int _socket = -1;
 	fd_set _fd;
-	sockaddr_in _remoteAddress;
+	sockaddr_in _remoteAddress, _servaddr;
 	Configuration _configuration;
 	Statistics _statistics;
 	Buffer* _rx_bufs[RX_BUFS];
@@ -59,13 +59,12 @@ public:
 
 		_socket = socket(AF_INET, SOCK_DGRAM, 0);
 
-		struct sockaddr_in servaddr;
-		memset(&servaddr, '\0', sizeof(sockaddr));
-		servaddr.sin_family = AF_INET;
-		servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
-		servaddr.sin_port = htons(5000);
-		bind(_socket, (struct sockaddr *)&servaddr, sizeof(sockaddr));
-
+		memset(&_servaddr, '\0', sizeof(sockaddr));
+		_servaddr.sin_family = AF_INET;
+		_servaddr.sin_addr.s_addr = INADDR_ANY;
+		_servaddr.sin_port = htons(5000);
+		bind(_socket, (struct sockaddr *)&_servaddr, sizeof(sockaddr));
+		
 		FD_ZERO(&_fd);
 		FD_SET(_socket, &_fd);
 
@@ -74,8 +73,6 @@ public:
 		_remoteAddress.sin_addr.s_addr = inet_addr(globalIPAddress);
 
 		create_receive_thread();
-
-		usleep(100000);
 	}
 
 #ifndef NULL
@@ -204,15 +201,19 @@ public:
 
 	void data_received(const char* data, int size)
 	{
-		Protocol prot = PROTO_TSTP;
-		Buffer* buf = new Buffer(this, 0);
+		
+		
+		db<UDPNIC>(TRC) << "dummy data received - problem below!" << endl;
 
-		buf->size(size);
+		// Protocol prot = PROTO_TSTP;
+		// Buffer* buf = new Buffer(this, 0);
 
-		// buf->fill(size, data);
-		memcpy(buf, data, size);
+		// buf->size(size);
 
-		notify(prot, buf);
+		// // buf->fill(size, data);
+		// memcpy(buf, data, size);
+
+		// notify(prot, buf);
 	}
 
 	static void* receive_thread(void* p)
@@ -221,20 +222,20 @@ public:
 
 		UDPNIC* udpnic = (UDPNIC*)p;
 
-		int _socket = -1;
+		// int _socket = -1;
 		fd_set _fd;
 
-		_socket = socket(AF_INET, SOCK_DGRAM, 0);
+		// _socket = socket(AF_INET, SOCK_DGRAM, 0);
 
-		struct sockaddr_in servaddr;
-		memset(&servaddr, '\0', sizeof(sockaddr));
-		servaddr.sin_family = AF_INET;
-		servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
-		servaddr.sin_port = htons(5001);
-		bind(_socket, (struct sockaddr *)&servaddr, sizeof(sockaddr));
+		// struct sockaddr_in servaddr;
+		// memset(&servaddr, '\0', sizeof(sockaddr));
+		// servaddr.sin_family = AF_INET;
+		// servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+		// servaddr.sin_port = htons(5001);
+		// bind(udpnic->_socket, (struct sockaddr *)&servaddr, sizeof(sockaddr));
 
-		FD_ZERO(&_fd);
-		FD_SET(_socket, &_fd);
+		// FD_ZERO(&_fd);
+		// FD_SET(_socket, &_fd);
 
 		while (true)
 		{
@@ -245,12 +246,20 @@ public:
 			memcpy(&readfd, &_fd, sizeof(fd_set));
 			char data[2048];
 			int size = 2048;
-			if (select(_socket + 1, &readfd, NULL, NULL, &timeout) > 0)
-			{
-				int ret = recvfrom(_socket, data, size, 0, NULL, NULL);
-				if (ret > 0)
-					udpnic->data_received(data, size);
-			}
+			socklen_t len;
+
+			int ret = recvfrom(udpnic->_socket, data, size, 
+					MSG_WAITALL, (struct sockaddr *) &udpnic->_remoteAddress,
+					&len);
+			if (ret > 0){
+				udpnic->data_received(data, size);
+			}					
+			// if (select(_socket + 1, &readfd, NULL, NULL, &timeout) > 0)
+			// {
+			// 	int ret = recvfrom(_socket, data, size, 0, NULL, NULL);
+			// 	if (ret > 0)
+			// 		udpnic->data_received(data, size);
+			// }
 		}
 	}
 

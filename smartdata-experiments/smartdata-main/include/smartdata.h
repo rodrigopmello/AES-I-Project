@@ -1318,13 +1318,13 @@ public:
 
     operator Value & () {
         db<SmartData>(TRC) << "SmartData[I]::operator Value()[v=" << _value << "]" << endl;
-        // if(expired()) {
-        //     if(predictive)
-        //         _value = _predictor->predict(Timekeeper::now());
-        //     else
-        //         // Remote data sources should have sent messages timely, thus triggering update()
-        //         db<SmartData>(WRN) << "SmartData[I]::value(this=" << this << ",t=" << _response.time() + _expiry << ",v=" << _value << ") => expired!" << endl;
-        // }
+        if(expired()) {
+            if(predictive)
+                _value = _predictor->predict(Timekeeper::now());
+            else
+                // Remote data sources should have sent messages timely, thus triggering update()
+                db<SmartData>(WRN) << "SmartData[I]::value(this=" << this << ",t=" << _response.time() + _expiry << ",v=" << _value << ") => expired!" << endl;
+        }
         return _value;
     }
 
