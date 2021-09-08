@@ -240,6 +240,7 @@ public:
 		Buffer* buf = new Buffer(this, 0);
 
 		//buf->size(size);
+		buf->destined_to_me = true; //how do I know if this packet is for me?
 		buf->fill(size, address(), address(), prot, reinterpret_cast<const void *>(data), size);
 		//memcpy(buf, data, size);
 
