@@ -17,7 +17,7 @@ TSTP::TSTP(NIC<NIC_Family> * nic)
 
     // The order parts are created defines the order they get notified when packets arrive:
     // mac->security(decrypt)->locator->timekeeper->router->manager->security(encrypt)->mac
-    _security = new /*(SYSTEM)*/ Security;
+    // _security = new /*(SYSTEM)*/ Security;
     _locator = new /*(SYSTEM)*/ Locator;
     _timekeeper = new /*(SYSTEM)*/ Timekeeper; // here() reports (0,0,0) if _locator wasn't created first!
     _router = new /*(SYSTEM)*/ Router;
@@ -34,9 +34,9 @@ TSTP::Security::Security()
 
     db<TSTP>(INF) << "TSTP::Security:uuid=" << _id << endl;
 
-    _aes.encrypt(_id, _id, _auth);
+    // _aes.encrypt(_id, _id, _auth);
 
-    attach(this);
+    // attach(this);
 
     // initialization continues through update as relevant packets are received
 
@@ -63,7 +63,7 @@ TSTP::Locator::Locator()
     //    _engine.confidence(100);
     //} else {
 	
-	// TCB - usar valores diferentes para instâncias diferentes.
+	// TCB - usar valores diferentes para instï¿½ncias diferentes.
         _engine.here(Space(0, 0, 0));
         _engine.confidence(0);
     //}

@@ -3,32 +3,24 @@ Diffie_Hellman::generate_keypair()
 Diffie_Hellman Private: [3596950572, 2802067423, 3554416254, 12345]
 Diffie_Hellman Base Point: {x=[2771147654, 203972732, 2341051181, 371193682],y=[3723328131, 3224216210, 1538255635, 3478833209],z=[1, 0, 0, 0]}
 Diffie_Hellman Public: {x=[3081183073, 3902741774, 4269429007, 1713837598],y=[1109269789, 2280997654, 3706347121, 3658402919],z=[1, 0, 0, 0]}
-Data_Observed() => 0x5659b2a8
-Data_Observed() => 0x5659b298
+Data_Observed() => 0x565b32c8
+Data_Observed() => 0x565b32d8
 SmartData Test
 TSTP::init()
-Data_Observed() => 0x56df1b80
+Data_Observed() => 0x56926b80
 UDPNIC()
 UDPNIC::address(addr=0:0:0:0:0:0)
-UDPNIC::reconfigure(c=0x56df1c34)
-UDPNIC::reconfigure(c=0x56df1c34)
-Data_Observer() => 0x56df5aa0
-TSTP(nic=0x56df1b80)
-Data_Observed::attach(obs=0x56df5aa0,cond=33793)
-Data_Observer() => 0x56df5ac0
-TSTP::Security()
-TSTP::Security:uuid=[208,90,223,86,0,0,0,0,0,0,0,0,0,0,0,0]
-AES::encrypt(data=0x5659b180,key=0x5659b180,result=0x5659b170
-AES::encrypt:data = {208,90,223,86,0,0,0,0,0,0,0,0,0,0,0,0}
-AES::encrypt:key = {208,90,223,86,0,0,0,0,0,0,0,0,0,0,0,receive_thread()
-0}
-AES::encrypt:result = {11,80,252,249,172,140,91,79,159,152,250,142,31,74,220,43}
-Data_Observed::attach(obs=0x56df5ac0)
-Data_Observer() => 0x56df5af0
+UDPNIC::reconfigure(c=0x56926c34)
+UDPNIC::reconfigure(c=0x56926c34)
+UDPNIC::result thread creation 0
+Data_Observer() => 0x5692aaa0
+TSTP(nic=0x56926b80)
+Data_Observed::attach(obs=0x5692aaa0,cond=33793)
+Data_Observer() => 0x5692aac0
 TSTP::Locator()
-Data_Observed::attach(obs=0x56df5af0)
+Data_Observed::attach(obs=0x5692aac0)
 TSTP::Locator:here=(0,0,0)[sink]
-Data_Observer() => 0x56df5b00
+Data_Observer() => 0x5692aad0
 TSTP::Timekeeper()
 TSTP::Timekeeper:timer accuracy = UDPNIC::configuration()
 1 ppb
@@ -38,18 +30,20 @@ TSTP::Timekeeper:maximum drift = 500000 us
 TSTP::Timekeeper:sync period = UDPNIC::configuration()
 UDPNIC::configuration()
 500000000000 us
-Data_Observed::attach(obs=0x56df5b00)
-Data_Observer() => 0x56df5b10
+Data_Observed::attach(obs=0x5692aad0)
+Data_Observer() => 0x5692aae0
 TSTP::Router()
-Data_Observed::attach(obs=0x56df5b10)
-Data_Observer() => 0x56df5b20
+Data_Observed::attach(obs=0x5692aae0)
+Data_Observer() => 0x5692aaf0
 TSTP::Manager()
-Data_Observed::attach(obs=0x56df5b20)
+Data_Observed::attach(obs=0x5692aaf0)
 Sizes:
   SmartData::Unit:           4
   SmartData::Value<SI|I32>:  4
   SmartData::Value<SI|I64>:  8
   SmartData::Value<SI|F32>:  4
+receive_thread()
+reading thread
   SmartData::Value<SI|D64>:  8
   SmartData::Spacetime:      12
   SmartData::Space:          4
@@ -64,163 +58,461 @@ Sizes:
   TSTP::Header:              38
   TSTP::Packet:              1500
 I'm a node!
-Observed() => 0xffcf1b1c
-Data_Observer() => 0xffcf1b2c
-Observer() => 0xffcf1b3c
+Observed() => 0xffe2dc68
+Data_Observer() => 0xffe2dc78
+Observer() => 0xffe2dc88
 UDPNIC::statistics()
 UDPNIC::configuration()
-Observed() => 0x56df5b30
-SmartData[R](d=0,x=1000000,m=CMD)=>0xffcf1b1c
+Observed() => 0x5692ab00
+SmartData[R](d=0,x=1000000,m=CMD)=>0xffe2dc68
 UDPNIC::statistics()
 UDPNIC::configuration()
-SmartData[R]::this=0xffcf1b1c=>{RES:ED:CMD:I:A,u={D:l=8191},d=0,o={(0,0,0),t=40935723819086},v=0,err=-1,x=1000000}
-Data_Observed::attach(obs=0xffcf1b2c,cond={D:l=8191})
+SmartData[R]::this=0xffe2dc68=>{RES:ED:CMD:I:A,u={D:l=8191},d=0,o={(0,0,0),t=104518700900204},v=0,err=-1,x=1000000}
+Data_Observed::attach(obs=0xffe2dc78,cond={D:l=8191})
 SmartData[R]::process(op=ADV)
 UDPNIC::alloc(s=UDPNIC::address()
 0:0:0:0:0:0,d=ff:ff:ff:ff:ff:ff,p=0x8401,on=0,al=0,ld=48)
-SmartData[R]::process:msg={h={RES:ADV:R/W,ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=40935723819086},u={D:l=8191},d=0,lh={(0,0,0),t=0}},ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=40935723819086},u={D:l=8191},d=0,lh={(0,0,0),t=0}},x=1000000,v=0}
-TSTP::send(buf=0x56df5b50)
-TSTP::marshal(buf=0x56df5b50)
-TSTP::Manager::marshal(buf=0x56df5b50)
-TSTP::Router::marshal(buf=0x56df5b50)
-TSTP::Locator::marshal(buf=0x56df5b50)
+SmartData[R]::process:msg={h={RES:ADV:R/W,ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104518700900204},u={D:l=8191},d=0,lh={(0,0,0),t=0}},ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104518700900204},u={D:l=8191},d=0,lh={(0,0,0),t=0}},x=1000000,v=0}
+TSTP::send(buf=0x5692ab20)
+TSTP::marshal(buf=0x5692ab20)
+TSTP::Manager::marshal(buf=0x5692ab20)
+TSTP::Router::marshal(buf=0x5692ab20)
+TSTP::Locator::marshal(buf=0x5692ab20)
 UDPNIC::statistics()
 UDPNIC::configuration()
 UDPNIC::statistics()
 UDPNIC::configuration()
-TSTP::Timekeeper::marshal(buf=0x56df5b50)
+TSTP::Timekeeper::marshal(buf=0x5692ab20)
 UDPNIC::statistics()
 UDPNIC::configuration()
 UDPNIC::statistics()
 UDPNIC::configuration()
-TSTP::Security::marshal(buf=0x56df5b50)
-TSTP::marshal:packet={h={RES:ADV:R/W,ver=0,tr=1,sc=0,lc=0,o={(0,0,0),t=40935724379800},u={D:l=8191},d=0,lh={(0,0,0),t=40935724363350}},ver=0,tr=1,sc=0,lc=0,o={(0,0,0),t=40935724379800},u={D:l=8191},d=0,lh={(0,0,0),t=40935724363350}},x=1000000,v=0}}
-UDPNIC::send(buf=0x56df5b50,frame=0x56df5b50 => {h={d=0:0:0:0:0:0,s=0:0:0:0:0:0,p=0},d=0x56df5b5e}
+TSTP::Security::marshal(buf=0x5692ab20)
+TSTP::marshal:packet={h={RES:ADV:R/W,ver=0,tr=1,sc=0,lc=0,o={(0,0,0),t=104518701637252},u={D:l=8191},d=0,lh={(0,0,0),t=104518701608866}},ver=0,tr=1,sc=0,lc=0,o={(0,0,0),t=104518701637252},u={D:l=8191},d=0,lh={(0,0,0),t=104518701608866}},x=1000000,v=0}}
+UDPNIC::send(buf=0x5692ab20,frame=0x5692ab20 => {h={d=0:0:0:0:0:0,s=0:0:0:0:0:0,p=0},d=0x5692ab2e}
 UDPNIC::address()
 UDPNIC::send(s=UDPNIC::address()
-0:0:0:0:0:0,d=0:0:0:0:0:0,p=0x800,d=0x56df6158,s=48)
-sendto size=48, data=0x56df6158
+0:0:0:0:0:0,d=0:0:0:0:0:0,p=0x800,d=0x5692b128,s=48)
+sendto size=48, data=0x5692b128
 Observed::notify()
 My coordinates are (0,0,0)
 The time now is UDPNIC::statistics()
 UDPNIC::configuration()
-40935725294742
+104518702397656
 I have three sensors that measure 536870911
 OMG that's ANTI-GRAVITY!!!
 I'll update data of this kind for 10 seconds...
 SmartData[R]::operator=(v=0)
-a=SmartData[R]::operator Value()[v=0]
+SmartData[R]::transduce
+SmartData[R]::sense
+SmartData[R]::empty interest 0
+SmartData[R]::thread null 1
+SmartData[R]::process(op=RES)
+UDPNIC::alloc(s=UDPNIC::address()
+0:0:0:0:0:0,d=ff:ff:ff:ff:ff:ff,p=0x8401,on=0,al=0,ld=48)
+SmartData[R]::process:msg={h={RES:RES:I:A,ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104518700900204},u={D:l=8191},d=0,lh={(0,0,0),t=0}},ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104518700900204},u={D:l=8191},d=0,lh={(0,0,0),t=0}},x=1000000,v=0}
+TSTP::send(buf=0x5692b140)
+TSTP::marshal(buf=0x5692b140)
+TSTP::Manager::marshal(buf=0x5692b140)
+TSTP::Router::marshal(buf=0x5692b140)
+TSTP::Locator::marshal(buf=0x5692b140)
 UDPNIC::statistics()
 UDPNIC::configuration()
 UDPNIC::statistics()
 UDPNIC::configuration()
-SmartData[R]::operator Value():v=1
-1
+TSTP::Timekeeper::marshal(buf=0x5692b140)
+UDPNIC::statistics()
+UDPNIC::configuration()
+UDPNIC::statistics()
+UDPNIC::configuration()
+TSTP::Security::marshal(buf=0x5692b140)
+TSTP::marshal:packet={h={RES:RES:I:A,ver=0,tr=1,sc=0,lc=0,o={(0,0,0),t=104518703224524},u={D:l=8191},d=0,lh={(0,0,0),t=104518703199236}},ver=0,tr=1,sc=0,lc=0,o={(0,0,0),t=104518703224524},u={D:l=8191},d=0,lh={(0,0,0),t=104518703199236}},x=1000000,v=0}}
+UDPNIC::send(buf=0x5692b140,frame=0x5692b140 => {h={d=0:0:0:0:0:0,s=0:0:0:0:0:0,p=0},d=0x5692b14e}
+UDPNIC::address()
+UDPNIC::send(s=UDPNIC::address()
+0:0:0:0:0:0,d=0:0:0:0:0:0,p=0x800,d=0x5692b748,s=48)
+sendto size=48, data=0x5692b748
+Observed::notify()
+waiting
+reading response 
+reading data
+UDPNIC::receive(s=,d=0xf7a3bb3c,s=2048) => 
+UDPNIC::receive(s= buffer data 0x56926cc0
+Data_Observed::notify(this=0x56926b80,cond=33793,obss= 1)
+Data_Observed::notify(this=0x56926b80,obs=0x5692aaa0)
+TSTP::update(nic=0x56926b80,prot=0x8401,buf=0x56926cc0)
+TSTP::update:packet={h={INT:DEL,ver=0,tr=0,sc=0,lc=87,o={(0,0,0),t=1461796608},u={D:l=0},d=101097,lh={(0,0,0),t=0}},ver=0,tr=0,sc=0,lc=87,o={(0,0,0),t=1461796608},u={D:l=0},d=101097,lh={(0,0,0),t=0}},r={{c=(0,0,0),r=0},t0=0,t1=0},x=0,p=0}}
+Data_Observed::notify(this=0x565b32c8)
+Observed::notify(this=0x565b32c8,obs=0x5692aac0)
+TSTP::Locator::update(obs=0x565b32c8,buf=0x56926cc0)
+HeCoPS::learn(c=(0,0,0),conf=87,rssi=0)
+Observed::notify(this=0x565b32c8,obs=0x5692aad0)
+TSTP::Timekeeper::update(obs=0x565b32c8,buf=0x56926cc0)[now=UDPNIC::statistics()
+UDPNIC::configuration()
+104532590693628]
+UDPNIC::statistics()
+UDPNIC::configuration()
+UDPNIC::configuration()
+UDPNIC::statistics()
+UDPNIC::configuration()
+UDPNIC::configuration()
+UDPNIC::configuration()
+Alarm::reset()
+TSTP::Timekeeper::update:adjusted timer offset by 0
+TSTP::Timekeeper::update:the time is now UDPNIC::statistics()
+UDPNIC::configuration()
+104532590717366 us since EPOCH (0)
+Observed::notify(this=0x565b32c8,obs=0x5692aae0)
+TSTP::Router::update(obs=0x565b32c8,buf=0x56926cc0)
+Observed::notify(this=0x565b32c8,obs=0x5692aaf0)
+TSTP::Manager::update(obs=0x565b32c8,buf=0x56926cc0)
+Data_Observed::notify(NOTIFIED= 1
+reading thread
+reading response 
+reading data
+UDPNIC::receive(s=,d=0xf7a3bb3c,s=2048) => 
+UDPNIC::receive(s= buffer data 0x569272e0
+Data_Observed::notify(this=0x56926b80,cond=33793,obss= 1)
+Data_Observed::notify(this=0x56926b80,obs=0x5692aaa0)
+TSTP::update(nic=0x56926b80,prot=0x8401,buf=0x569272e0)
+TSTP::update:packet={h={INT:DEL,ver=0,tr=0,sc=0,lc=87,o={(0,0,0),t=1461796608},u={D:l=0},d=101097,lh={(0,0,0),t=0}},ver=0,tr=0,sc=0,lc=87,o={(0,0,0),t=1461796608},u={D:l=0},d=101097,lh={(0,0,0),t=0}},r={{c=(0,0,0),r=0},t0=0,t1=0},x=0,p=0}}
+Data_Observed::notify(this=0x565b32c8)
+Observed::notify(this=0x565b32c8,obs=0x5692aac0)
+TSTP::Locator::update(obs=0x565b32c8,buf=0x569272e0)
+HeCoPS::learn(c=(0,0,0),conf=87,rssi=0)
+Observed::notify(this=0x565b32c8,obs=0x5692aad0)
+TSTP::Timekeeper::update(obs=0x565b32c8,buf=0x569272e0)[now=UDPNIC::statistics()
+UDPNIC::configuration()
+104532590844880]
+UDPNIC::statistics()
+UDPNIC::configuration()
+Observed::notify(this=0x565b32c8,obs=0x5692aae0)
+TSTP::Router::update(obs=0x565b32c8,buf=0x569272e0)
+Observed::notify(this=0x565b32c8,obs=0x5692aaf0)
+TSTP::Manager::update(obs=0x565b32c8,buf=0x569272e0)
+Data_Observed::notify(NOTIFIED= 1
+reading thread
 SmartData[R]::operator=(v=1)
-a=SmartData[R]::operator Value()[v=1]
+SmartData[R]::transduce
+SmartData[R]::sense
+SmartData[R]::empty interest 0
+SmartData[R]::thread null 1
+SmartData[R]::process(op=RES)
+UDPNIC::alloc(s=UDPNIC::address()
+0:0:0:0:0:0,d=ff:ff:ff:ff:ff:ff,p=0x8401,on=0,al=0,ld=48)
+SmartData[R]::process:msg={h={RES:RES:I:A,ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104518700900204},u={D:l=8191},d=0,lh={(0,0,0),t=0}},ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104518700900204},u={D:l=8191},d=0,lh={(0,0,0),t=0}},x=1000000,v=1}
+TSTP::send(buf=0x5692b760)
+TSTP::marshal(buf=0x5692b760)
+TSTP::Manager::marshal(buf=0x5692b760)
+TSTP::Router::marshal(buf=0x5692b760)
+TSTP::Locator::marshal(buf=0x5692b760)
 UDPNIC::statistics()
 UDPNIC::configuration()
 UDPNIC::statistics()
 UDPNIC::configuration()
-SmartData[R]::operator Value():v=2
-2
+TSTP::Timekeeper::marshal(buf=0x5692b760)
+UDPNIC::statistics()
+UDPNIC::configuration()
+UDPNIC::statistics()
+UDPNIC::configuration()
+TSTP::Security::marshal(buf=0x5692b760)
+TSTP::marshal:packet={h={RES:RES:I:A,ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104554707002124},u={D:l=8191},d=0,lh={(0,0,0),t=104554706974588}},ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104554707002124},u={D:l=8191},d=0,lh={(0,0,0),t=104554706974588}},x=1000000,v=1}}
+UDPNIC::send(buf=0x5692b760,frame=0x5692b760 => {h={d=0:0:0:0:0:0,s=0:0:0:0:0:0,p=0},d=0x5692b76e}
+UDPNIC::address()
+UDPNIC::send(s=UDPNIC::address()
+0:0:0:0:0:0,d=0:0:0:0:0:0,p=0x800,d=0x5692bd68,s=48)
+sendto size=48, data=0x5692bd68
+Observed::notify()
+waiting
 SmartData[R]::operator=(v=2)
-a=SmartData[R]::operator Value()[v=2]
+SmartData[R]::transduce
+SmartData[R]::sense
+SmartData[R]::empty interest 0
+SmartData[R]::thread null 1
+SmartData[R]::process(op=RES)
+UDPNIC::alloc(s=UDPNIC::address()
+0:0:0:0:0:0,d=ff:ff:ff:ff:ff:ff,p=0x8401,on=0,al=0,ld=48)
+SmartData[R]::process:msg={h={RES:RES:I:A,ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104518700900204},u={D:l=8191},d=0,lh={(0,0,0),t=0}},ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104518700900204},u={D:l=8191},d=0,lh={(0,0,0),t=0}},x=1000000,v=2}
+TSTP::send(buf=0x5692bd80)
+TSTP::marshal(buf=0x5692bd80)
+TSTP::Manager::marshal(buf=0x5692bd80)
+TSTP::Router::marshal(buf=0x5692bd80)
+TSTP::Locator::marshal(buf=0x5692bd80)
 UDPNIC::statistics()
 UDPNIC::configuration()
 UDPNIC::statistics()
 UDPNIC::configuration()
-SmartData[R]::operator Value():v=3
-3
+TSTP::Timekeeper::marshal(buf=0x5692bd80)
+UDPNIC::statistics()
+UDPNIC::configuration()
+UDPNIC::statistics()
+UDPNIC::configuration()
+TSTP::Security::marshal(buf=0x5692bd80)
+TSTP::marshal:packet={h={RES:RES:I:A,ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104590710307676},u={D:l=8191},d=0,lh={(0,0,0),t=104590710280508}},ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104590710307676},u={D:l=8191},d=0,lh={(0,0,0),t=104590710280508}},x=1000000,v=2}}
+UDPNIC::send(buf=0x5692bd80,frame=0x5692bd80 => {h={d=0:0:0:0:0:0,s=0:0:0:0:0:0,p=0},d=0x5692bd8e}
+UDPNIC::address()
+UDPNIC::send(s=UDPNIC::address()
+0:0:0:0:0:0,d=0:0:0:0:0:0,p=0x800,d=0x5692c388,s=48)
+sendto size=48, data=0x5692c388
+Observed::notify()
+waiting
 SmartData[R]::operator=(v=3)
-a=SmartData[R]::operator Value()[v=3]
+SmartData[R]::transduce
+SmartData[R]::sense
+SmartData[R]::empty interest 0
+SmartData[R]::thread null 1
+SmartData[R]::process(op=RES)
+UDPNIC::alloc(s=UDPNIC::address()
+0:0:0:0:0:0,d=ff:ff:ff:ff:ff:ff,p=0x8401,on=0,al=0,ld=48)
+SmartData[R]::process:msg={h={RES:RES:I:A,ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104518700900204},u={D:l=8191},d=0,lh={(0,0,0),t=0}},ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104518700900204},u={D:l=8191},d=0,lh={(0,0,0),t=0}},x=1000000,v=3}
+TSTP::send(buf=0x5692c3a0)
+TSTP::marshal(buf=0x5692c3a0)
+TSTP::Manager::marshal(buf=0x5692c3a0)
+TSTP::Router::marshal(buf=0x5692c3a0)
+TSTP::Locator::marshal(buf=0x5692c3a0)
 UDPNIC::statistics()
 UDPNIC::configuration()
 UDPNIC::statistics()
 UDPNIC::configuration()
-SmartData[R]::operator Value():v=4
-4
+TSTP::Timekeeper::marshal(buf=0x5692c3a0)
+UDPNIC::statistics()
+UDPNIC::configuration()
+UDPNIC::statistics()
+UDPNIC::configuration()
+TSTP::Security::marshal(buf=0x5692c3a0)
+TSTP::marshal:packet={h={RES:RES:I:A,ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104626713389690},u={D:l=8191},d=0,lh={(0,0,0),t=104626713362364}},ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104626713389690},u={D:l=8191},d=0,lh={(0,0,0),t=104626713362364}},x=1000000,v=3}}
+UDPNIC::send(buf=0x5692c3a0,frame=0x5692c3a0 => {h={d=0:0:0:0:0:0,s=0:0:0:0:0:0,p=0},d=0x5692c3ae}
+UDPNIC::address()
+UDPNIC::send(s=UDPNIC::address()
+0:0:0:0:0:0,d=0:0:0:0:0:0,p=0x800,d=0x5692c9a8,s=48)
+sendto size=48, data=0x5692c9a8
+Observed::notify()
+waiting
 SmartData[R]::operator=(v=4)
-a=SmartData[R]::operator Value()[v=4]
+SmartData[R]::transduce
+SmartData[R]::sense
+SmartData[R]::empty interest 0
+SmartData[R]::thread null 1
+SmartData[R]::process(op=RES)
+UDPNIC::alloc(s=UDPNIC::address()
+0:0:0:0:0:0,d=ff:ff:ff:ff:ff:ff,p=0x8401,on=0,al=0,ld=48)
+SmartData[R]::process:msg={h={RES:RES:I:A,ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104518700900204},u={D:l=8191},d=0,lh={(0,0,0),t=0}},ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104518700900204},u={D:l=8191},d=0,lh={(0,0,0),t=0}},x=1000000,v=4}
+TSTP::send(buf=0x5692c9c0)
+TSTP::marshal(buf=0x5692c9c0)
+TSTP::Manager::marshal(buf=0x5692c9c0)
+TSTP::Router::marshal(buf=0x5692c9c0)
+TSTP::Locator::marshal(buf=0x5692c9c0)
 UDPNIC::statistics()
 UDPNIC::configuration()
 UDPNIC::statistics()
 UDPNIC::configuration()
-SmartData[R]::operator Value():v=5
-5
+TSTP::Timekeeper::marshal(buf=0x5692c9c0)
+UDPNIC::statistics()
+UDPNIC::configuration()
+UDPNIC::statistics()
+UDPNIC::configuration()
+TSTP::Security::marshal(buf=0x5692c9c0)
+TSTP::marshal:packet={h={RES:RES:I:A,ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104662716695892},u={D:l=8191},d=0,lh={(0,0,0),t=104662716668380}},ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104662716695892},u={D:l=8191},d=0,lh={(0,0,0),t=104662716668380}},x=1000000,v=4}}
+UDPNIC::send(buf=0x5692c9c0,frame=0x5692c9c0 => {h={d=0:0:0:0:0:0,s=0:0:0:0:0:0,p=0},d=0x5692c9ce}
+UDPNIC::address()
+UDPNIC::send(s=UDPNIC::address()
+0:0:0:0:0:0,d=0:0:0:0:0:0,p=0x800,d=0x5692cfc8,s=48)
+sendto size=48, data=0x5692cfc8
+Observed::notify()
+waiting
 SmartData[R]::operator=(v=5)
-a=SmartData[R]::operator Value()[v=5]
+SmartData[R]::transduce
+SmartData[R]::sense
+SmartData[R]::empty interest 0
+SmartData[R]::thread null 1
+SmartData[R]::process(op=RES)
+UDPNIC::alloc(s=UDPNIC::address()
+0:0:0:0:0:0,d=ff:ff:ff:ff:ff:ff,p=0x8401,on=0,al=0,ld=48)
+SmartData[R]::process:msg={h={RES:RES:I:A,ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104518700900204},u={D:l=8191},d=0,lh={(0,0,0),t=0}},ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104518700900204},u={D:l=8191},d=0,lh={(0,0,0),t=0}},x=1000000,v=5}
+TSTP::send(buf=0x5692cfe0)
+TSTP::marshal(buf=0x5692cfe0)
+TSTP::Manager::marshal(buf=0x5692cfe0)
+TSTP::Router::marshal(buf=0x5692cfe0)
+TSTP::Locator::marshal(buf=0x5692cfe0)
 UDPNIC::statistics()
 UDPNIC::configuration()
 UDPNIC::statistics()
 UDPNIC::configuration()
-SmartData[R]::operator Value():v=6
-6
+TSTP::Timekeeper::marshal(buf=0x5692cfe0)
+UDPNIC::statistics()
+UDPNIC::configuration()
+UDPNIC::statistics()
+UDPNIC::configuration()
+TSTP::Security::marshal(buf=0x5692cfe0)
+TSTP::marshal:packet={h={RES:RES:I:A,ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104698719774344},u={D:l=8191},d=0,lh={(0,0,0),t=104698719745876}},ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104698719774344},u={D:l=8191},d=0,lh={(0,0,0),t=104698719745876}},x=1000000,v=5}}
+UDPNIC::send(buf=0x5692cfe0,frame=0x5692cfe0 => {h={d=0:0:0:0:0:0,s=0:0:0:0:0:0,p=0},d=0x5692cfee}
+UDPNIC::address()
+UDPNIC::send(s=UDPNIC::address()
+0:0:0:0:0:0,d=0:0:0:0:0:0,p=0x800,d=0x5692d5e8,s=48)
+sendto size=48, data=0x5692d5e8
+Observed::notify()
+waiting
 SmartData[R]::operator=(v=6)
-a=SmartData[R]::operator Value()[v=6]
+SmartData[R]::transduce
+SmartData[R]::sense
+SmartData[R]::empty interest 0
+SmartData[R]::thread null 1
+SmartData[R]::process(op=RES)
+UDPNIC::alloc(s=UDPNIC::address()
+0:0:0:0:0:0,d=ff:ff:ff:ff:ff:ff,p=0x8401,on=0,al=0,ld=48)
+SmartData[R]::process:msg={h={RES:RES:I:A,ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104518700900204},u={D:l=8191},d=0,lh={(0,0,0),t=0}},ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104518700900204},u={D:l=8191},d=0,lh={(0,0,0),t=0}},x=1000000,v=6}
+TSTP::send(buf=0x5692d600)
+TSTP::marshal(buf=0x5692d600)
+TSTP::Manager::marshal(buf=0x5692d600)
+TSTP::Router::marshal(buf=0x5692d600)
+TSTP::Locator::marshal(buf=0x5692d600)
 UDPNIC::statistics()
 UDPNIC::configuration()
 UDPNIC::statistics()
 UDPNIC::configuration()
-SmartData[R]::operator Value():v=7
-7
+TSTP::Timekeeper::marshal(buf=0x5692d600)
+UDPNIC::statistics()
+UDPNIC::configuration()
+UDPNIC::statistics()
+UDPNIC::configuration()
+TSTP::Security::marshal(buf=0x5692d600)
+TSTP::marshal:packet={h={RES:RES:I:A,ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104734723074556},u={D:l=8191},d=0,lh={(0,0,0),t=104734723031784}},ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104734723074556},u={D:l=8191},d=0,lh={(0,0,0),t=104734723031784}},x=1000000,v=6}}
+UDPNIC::send(buf=0x5692d600,frame=0x5692d600 => {h={d=0:0:0:0:0:0,s=0:0:0:0:0:0,p=0},d=0x5692d60e}
+UDPNIC::address()
+UDPNIC::send(s=UDPNIC::address()
+0:0:0:0:0:0,d=0:0:0:0:0:0,p=0x800,d=0x5692dc08,s=48)
+sendto size=48, data=0x5692dc08
+Observed::notify()
+waiting
 SmartData[R]::operator=(v=7)
-a=SmartData[R]::operator Value()[v=7]
+SmartData[R]::transduce
+SmartData[R]::sense
+SmartData[R]::empty interest 0
+SmartData[R]::thread null 1
+SmartData[R]::process(op=RES)
+UDPNIC::alloc(s=UDPNIC::address()
+0:0:0:0:0:0,d=ff:ff:ff:ff:ff:ff,p=0x8401,on=0,al=0,ld=48)
+SmartData[R]::process:msg={h={RES:RES:I:A,ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104518700900204},u={D:l=8191},d=0,lh={(0,0,0),t=0}},ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104518700900204},u={D:l=8191},d=0,lh={(0,0,0),t=0}},x=1000000,v=7}
+TSTP::send(buf=0x5692dc20)
+TSTP::marshal(buf=0x5692dc20)
+TSTP::Manager::marshal(buf=0x5692dc20)
+TSTP::Router::marshal(buf=0x5692dc20)
+TSTP::Locator::marshal(buf=0x5692dc20)
 UDPNIC::statistics()
 UDPNIC::configuration()
 UDPNIC::statistics()
 UDPNIC::configuration()
-SmartData[R]::operator Value():v=8
-8
+TSTP::Timekeeper::marshal(buf=0x5692dc20)
+UDPNIC::statistics()
+UDPNIC::configuration()
+UDPNIC::statistics()
+UDPNIC::configuration()
+TSTP::Security::marshal(buf=0x5692dc20)
+TSTP::marshal:packet={h={RES:RES:I:A,ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104770726740024},u={D:l=8191},d=0,lh={(0,0,0),t=104770726712840}},ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104770726740024},u={D:l=8191},d=0,lh={(0,0,0),t=104770726712840}},x=1000000,v=7}}
+UDPNIC::send(buf=0x5692dc20,frame=0x5692dc20 => {h={d=0:0:0:0:0:0,s=0:0:0:0:0:0,p=0},d=0x5692dc2e}
+UDPNIC::address()
+UDPNIC::send(s=UDPNIC::address()
+0:0:0:0:0:0,d=0:0:0:0:0:0,p=0x800,d=0x5692e228,s=48)
+sendto size=48, data=0x5692e228
+Observed::notify()
+waiting
 SmartData[R]::operator=(v=8)
-a=SmartData[R]::operator Value()[v=8]
+SmartData[R]::transduce
+SmartData[R]::sense
+SmartData[R]::empty interest 0
+SmartData[R]::thread null 1
+SmartData[R]::process(op=RES)
+UDPNIC::alloc(s=UDPNIC::address()
+0:0:0:0:0:0,d=ff:ff:ff:ff:ff:ff,p=0x8401,on=0,al=0,ld=48)
+SmartData[R]::process:msg={h={RES:RES:I:A,ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104518700900204},u={D:l=8191},d=0,lh={(0,0,0),t=0}},ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104518700900204},u={D:l=8191},d=0,lh={(0,0,0),t=0}},x=1000000,v=8}
+TSTP::send(buf=0x5692e240)
+TSTP::marshal(buf=0x5692e240)
+TSTP::Manager::marshal(buf=0x5692e240)
+TSTP::Router::marshal(buf=0x5692e240)
+TSTP::Locator::marshal(buf=0x5692e240)
 UDPNIC::statistics()
 UDPNIC::configuration()
 UDPNIC::statistics()
 UDPNIC::configuration()
-SmartData[R]::operator Value():v=9
-9
+TSTP::Timekeeper::marshal(buf=0x5692e240)
+UDPNIC::statistics()
+UDPNIC::configuration()
+UDPNIC::statistics()
+UDPNIC::configuration()
+TSTP::Security::marshal(buf=0x5692e240)
+TSTP::marshal:packet={h={RES:RES:I:A,ver=0,tr=1,sc=0,lc=0,o={(0,0,0),t=104806729873242},u={D:l=8191},d=0,lh={(0,0,0),t=104806729844728}},ver=0,tr=1,sc=0,lc=0,o={(0,0,0),t=104806729873242},u={D:l=8191},d=0,lh={(0,0,0),t=104806729844728}},x=1000000,v=8}}
+UDPNIC::send(buf=0x5692e240,frame=0x5692e240 => {h={d=0:0:0:0:0:0,s=0:0:0:0:0:0,p=0},d=0x5692e24e}
+UDPNIC::address()
+UDPNIC::send(s=UDPNIC::address()
+0:0:0:0:0:0,d=0:0:0:0:0:0,p=0x800,d=0x5692e848,s=48)
+sendto size=48, data=0x5692e848
+Observed::notify()
+waiting
 SmartData[R]::operator=(v=9)
-a=SmartData[R]::operator Value()[v=9]
+SmartData[R]::transduce
+SmartData[R]::sense
+SmartData[R]::empty interest 0
+SmartData[R]::thread null 1
+SmartData[R]::process(op=RES)
+UDPNIC::alloc(s=UDPNIC::address()
+0:0:0:0:0:0,d=ff:ff:ff:ff:ff:ff,p=0x8401,on=0,al=0,ld=48)
+SmartData[R]::process:msg={h={RES:RES:I:A,ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104518700900204},u={D:l=8191},d=0,lh={(0,0,0),t=0}},ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104518700900204},u={D:l=8191},d=0,lh={(0,0,0),t=0}},x=1000000,v=9}
+TSTP::send(buf=0x5692e860)
+TSTP::marshal(buf=0x5692e860)
+TSTP::Manager::marshal(buf=0x5692e860)
+TSTP::Router::marshal(buf=0x5692e860)
+TSTP::Locator::marshal(buf=0x5692e860)
 UDPNIC::statistics()
 UDPNIC::configuration()
 UDPNIC::statistics()
 UDPNIC::configuration()
-SmartData[R]::operator Value():v=10
-10
+TSTP::Timekeeper::marshal(buf=0x5692e860)
+UDPNIC::statistics()
+UDPNIC::configuration()
+UDPNIC::statistics()
+UDPNIC::configuration()
+TSTP::Security::marshal(buf=0x5692e860)
+TSTP::marshal:packet={h={RES:RES:I:A,ver=0,tr=1,sc=0,lc=0,o={(0,0,0),t=104842732926234},u={D:l=8191},d=0,lh={(0,0,0),t=104842732897330}},ver=0,tr=1,sc=0,lc=0,o={(0,0,0),t=104842732926234},u={D:l=8191},d=0,lh={(0,0,0),t=104842732897330}},x=1000000,v=9}}
+UDPNIC::send(buf=0x5692e860,frame=0x5692e860 => {h={d=0:0:0:0:0:0,s=0:0:0:0:0:0,p=0},d=0x5692e86e}
+UDPNIC::address()
+UDPNIC::send(s=UDPNIC::address()
+0:0:0:0:0:0,d=0:0:0:0:0:0,p=0x800,d=0x5692ee68,s=48)
+sendto size=48, data=0x5692ee68
+Observed::notify()
+waiting
 done!
-~SmartData[R](this=0xffcf1b1c)
+~SmartData[R](this=0xffe2dc68)
 SmartData[R]::process(op=DEL)
 UDPNIC::alloc(s=UDPNIC::address()
 0:0:0:0:0:0,d=ff:ff:ff:ff:ff:ff,p=0x8401,on=0,al=0,ld=48)
-SmartData[R]::process:msg={h={RES:DEL,ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=40968129981900},u={D:l=8191},d=0,lh={(0,0,0),t=0}},ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=40968129981900},u={D:l=8191},d=0,lh={(0,0,0),t=0}},x=1000000,v=0}
-TSTP::send(buf=0x56df6170)
-TSTP::marshal(buf=0x56df6170)
-TSTP::Manager::marshal(buf=0x56df6170)
-TSTP::Router::marshal(buf=0x56df6170)
-TSTP::Locator::marshal(buf=0x56df6170)
+SmartData[R]::process:msg={h={RES:DEL,ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104518700900204},u={D:l=8191},d=0,lh={(0,0,0),t=0}},ver=0,tr=0,sc=0,lc=0,o={(0,0,0),t=104518700900204},u={D:l=8191},d=0,lh={(0,0,0),t=0}},x=1000000,v=0}
+TSTP::send(buf=0x5692ee80)
+TSTP::marshal(buf=0x5692ee80)
+TSTP::Manager::marshal(buf=0x5692ee80)
+TSTP::Router::marshal(buf=0x5692ee80)
+TSTP::Locator::marshal(buf=0x5692ee80)
 UDPNIC::statistics()
 UDPNIC::configuration()
 UDPNIC::statistics()
 UDPNIC::configuration()
-TSTP::Timekeeper::marshal(buf=0x56df6170)
+TSTP::Timekeeper::marshal(buf=0x5692ee80)
 UDPNIC::statistics()
 UDPNIC::configuration()
 UDPNIC::statistics()
 UDPNIC::configuration()
-TSTP::Security::marshal(buf=0x56df6170)
-TSTP::marshal:packet={h={RES:DEL,ver=0,tr=1,sc=0,lc=0,o={(0,0,0),t=40971730896218},u={D:l=8191},d=0,lh={(0,0,0),t=40971730884522}},ver=0,tr=1,sc=0,lc=0,o={(0,0,0),t=40971730896218},u={D:l=8191},d=0,lh={(0,0,0),t=40971730884522}},x=1000000,v=0}}
-UDPNIC::send(buf=0x56df6170,frame=0x56df6170 => {h={d=0:0:0:0:0:0,s=0:0:0:0:0:0,p=0},d=0x56df617e}
+TSTP::Security::marshal(buf=0x5692ee80)
+TSTP::marshal:packet={h={RES:DEL,ver=0,tr=1,sc=0,lc=0,o={(0,0,0),t=104878736259880},u={D:l=8191},d=0,lh={(0,0,0),t=104878736230288}},ver=0,tr=1,sc=0,lc=0,o={(0,0,0),t=104878736259880},u={D:l=8191},d=0,lh={(0,0,0),t=104878736230288}},x=1000000,v=0}}
+UDPNIC::send(buf=0x5692ee80,frame=0x5692ee80 => {h={d=0:0:0:0:0:0,s=0:0:0:0:0:0,p=0},d=0x5692ee8e}
 UDPNIC::address()
 UDPNIC::send(s=UDPNIC::address()
-0:0:0:0:0:0,d=0:0:0:0:0:0,p=0x800,d=0x56df6778,s=48)
-sendto size=48, data=0x56df6778
+0:0:0:0:0:0,d=0:0:0:0:0:0,p=0x800,d=0x5692f488,s=48)
+sendto size=48, data=0x5692f488
 Observed::notify()
-Data_Observed::detach(obs=0xffcf1b2c,cond={D:l=8191})
-~Observer(this=0xffcf1b3c)
-~Data_Observer(this=0xffcf1b2c)
-~Observed(this=0xffcf1b1c)
+Data_Observed::detach(obs=0xffe2dc78,cond={D:l=8191})
+~Observer(this=0xffe2dc88)
+~Data_Observer(this=0xffe2dc78)
+~Observed(this=0xffe2dc68)
 Bye!
-~Data_Observed(this=0x5659b298)
-~Data_Observed(this=0x5659b2a8)
+~Data_Observed(this=0x565b32d8)
+~Data_Observed(this=0x565b32c8)
 HeCoPS::~HeCoPS()

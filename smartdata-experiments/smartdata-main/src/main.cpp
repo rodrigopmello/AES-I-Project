@@ -5,10 +5,25 @@
 #include <smartdata.h>
 #include <unistd.h>
 #include <string.h>
+// #include <machine/udpnic.h>
+// #include <network/tstp/tstp.h>
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
+  
+#define PORT     5001
+#define MAXLINE 1024
+
 
 static const int ITERATIONS = 10;
 
-#define Delay usleep
+#define Delay sleep
 
 // This is not good, but it will work...
 unsigned int globalCoord = 1;
@@ -16,16 +31,22 @@ const char* globalIPAddress = "127.0.0.1";
 
 OStream cout;
 
-void controller(const Antigravity & in1, const Antigravity & in2, Antigravity & out) {}
+// void controller(const Antigravity & in1, const Antigravity & in2, Antigravity & out) {}
 
 void sink();
 void Usage();
 void node();
+void server();
 
 int main(int argc, char* argv[])
 {
 	cout << "SmartData Test" << endl;
+	// NIC<NIC_Family>* nic = new UDPNIC();
+	// Buffer * buffer = Network::alloc(sizeof(Response) + sizeof(Value));
+	// nic->send()
+	
 
+	
 	if (argc != 2)
 	{
 		Usage();
@@ -42,10 +63,9 @@ int main(int argc, char* argv[])
 		Usage();
 		return -1;
 	}
-
-	TSTP::init();
-
-	cout << "Sizes:" << endl;
+	
+	TSTP::init();	
+	cout << "Sizes:" << endl;	
 	cout << "  SmartData::Unit:           " << sizeof(SmartData::Unit) << endl;
 	cout << "  SmartData::Value<SI|I32>:  " << sizeof(SmartData::Value<SmartData::Unit::SI | SmartData::Unit::I32>) << endl;
 	cout << "  SmartData::Value<SI|I64>:  " << sizeof(SmartData::Value<SmartData::Unit::SI | SmartData::Unit::I64>) << endl;
@@ -60,7 +80,7 @@ int main(int argc, char* argv[])
 	cout << "  SmartData::Interest:       " << sizeof(SmartData::Interest) << endl;
 	cout << "  SmartData::Response:       " << sizeof(SmartData::Response) << endl;
 	cout << "  SmartData::Command:        " << sizeof(SmartData::Command) << endl;
-	cout << "  SmartData::Control:        " << sizeof(SmartData::Control) << endl;
+	cout << "  SmartData::Control:        " << sizeof(SmartData::Control) << endl;	
 	cout << "  TSTP::Header:              " << sizeof(TSTP::Header) << endl;
 	cout << "  TSTP::Packet:              " << sizeof(TSTP::Packet) << endl;
 
@@ -83,13 +103,16 @@ void Usage()
 	cout << "  mode: sink or node" << endl;
 }
 
+
 void sink()
 {
 	cout << "I'm the sink!" << endl;
-
-	Antigravity_Proxy a(Antigravity::Region(0, 0, 0, 100, Antigravity::now(), Antigravity::now() + (ITERATIONS + 5) * 1000000), 10000000);
+	
+	cout << "current time " << Antigravity::now() << endl;
+	cout << "expiry time " << Antigravity::now() + (ITERATIONS + 5) * 1000 << endl;	
+	Antigravity_Proxy a(Antigravity::Region(0, 0, 0, 100, Antigravity::now(), Antigravity::now() + (ITERATIONS + 500) * 100), 10000000);
 	//    Smart_Key_Proxy d(Smart_Key::Region((0, 0, 0), 100, Smart_Key::now(), Smart_Key::now()+10000000), 10000000);
-
+	
 	cout << "My coordinates are " << a.here() << endl;
 	cout << "The time now is " << a.now() << endl;
 
@@ -97,15 +120,18 @@ void sink()
 	cout << "I'll wait for data of this kind for " << ITERATIONS << " seconds..." << endl;
 	for (int i = 0; i < ITERATIONS + 5; i++) {
 		cout << "a=" << a << endl;
-		Delay(1000000);
+		//server();
+		Delay(10);
 	}
 	cout << "done!" << endl;
+
 }
+
 
 void node()
 {
 	cout << "I'm a node!" << endl;
-
+	Delay(5);	
 	Antigravity a(0, 1000000, SmartData::ADVERTISED);
 	//    Antigravity b(0, 10000000, Antigravity::ADVERTISED);
 	//    Antigravity c(0, 1000000, Antigravity::COMMANDED);
@@ -126,12 +152,12 @@ void node()
 	for (int i = 0; i < ITERATIONS; i++) {
 		a = i;
 		//        b = i * 2;
-		//        c = i * 3;
-		//        db<TSTP>(TRC) << "a=" << a << endl;
-		cout << "a=" << a << endl;
+		//        c = i * 3;		
+		// cout << "a=" << a << endl;
 		//        cout << "b=" << b << endl;
 		//        db<TSTP>(TRC) << "c=" << c << endl;
-		Delay(1000000);
+		cout << "waiting" << endl;
+		Delay(10);
 	}
 	cout << "done!" << endl;
 }

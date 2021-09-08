@@ -39,7 +39,7 @@ class Dummy_Transducer: public Transducer<SmartData::Unit::Antigravity>
     friend Responsive_SmartData<Dummy_Transducer>;
 
 public:
-    static const bool active = false;
+    static const bool active = true;
     static const Uncertainty UNCERTAINTY = UNKNOWN;
     static const Type TYPE = SENSOR | ACTUATOR;
 

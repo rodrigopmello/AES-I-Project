@@ -11,6 +11,8 @@
 #include <utility/observer.h>
 #include <utility/predictor.h>
 
+// agent -> smart_data(decision) -> applicacao (interpreta smart data) -> applicacao 2 (vai escrever no CARLA)
+
 class SmartData
 {
 protected:
@@ -963,7 +965,7 @@ private:
     };
 
 public:
-    Responsive_SmartData(const Device_Id & dev, const Time & expiry, const Mode & mode = PRIVATE, const Microsecond & period = 0 )
+    Responsive_SmartData(const Device_Id & dev, const Time & expiry, const Mode & mode = ADVERTISED, const Microsecond & period = 0 )
     : _mode(mode), _origin(Locator::here(), Timekeeper::now()), _device(dev), _value(0), _uncertainty(UNCERTAINTY), _expiry(expiry),
      _transducer(new /*(SYSTEM)*/ Transducer(dev)), _predictor(predictive ? new /*(SYSTEM)*/ Predictor(typename Predictor::Configuration(), false) : 0), _thread(0), _link(this) {
         db<SmartData>(TRC) << "SmartData[R](d=" << dev << ",x=" << expiry << ",m=" << ((mode & COMMANDED) ? "CMD" : ((mode & ADVERTISED) ? "ADV" : "PRI")) << ")=>" << this << endl;
@@ -1016,6 +1018,8 @@ public:
                 } else {
                     // Active transducer should have called update() timely
                     db<SmartData>(WRN) << "SmartData[R]::value(this=" << this << ",t=" <<_origin.time + _expiry << ",v=" << _value << ") => expired!" << endl;
+                    // _value = _transducer->sense();
+                    // _origin = Timekeeper::now();
                 }
             }
         } else
@@ -1033,10 +1037,19 @@ public:
         db<SmartData>(TRC) << "SmartData[R]::operator=(v=" << v << ")" << endl;
 
         if(Transducer::TYPE & Transducer::ACTUATOR) {
+            db<SmartData>(TRC) << "SmartData[R]::transduce" << endl;
             _transducer->actuate(v);
+            db<SmartData>(TRC) << "SmartData[R]::sense" << endl;
             _value = _transducer->sense();
-            if(!_thread && !_interesteds.empty())
+            db<SmartData>(TRC) << "SmartData[R]::empty interest " <<  !_interesteds.empty() << endl;
+            db<SmartData>(TRC) << "SmartData[R]::thread null " <<  !_thread << endl;
+            process(RESPOND);
+            if(!_thread && !_interesteds.empty()){
+                db<SmartData>(TRC) << "SmartData[R]::thread doidona" << endl;
                 process(RESPOND);
+            }
+
+                
         } else
             db<SmartData>(WRN) << "SmartData[R]::operator= called for sensing-only transducer!" << endl;
 
@@ -1085,20 +1098,21 @@ private:
             Buffer * buffer = Network::alloc(sizeof(Response) + sizeof(Value));
             Header * header = buffer->frame()->template data<Header>();
             Response * response = new (header) Response(_origin, UNIT, _device, (_mode | op), _uncertainty, _expiry);
-
             if(op == RESPOND)
                 response->value<Value>(_value);
 
             db<SmartData>(INF) << "SmartData[R]::process:msg=" << *response << endl;
             Network::send(buffer);
+            
         }
         notify();
     }
-
+    
     // Network::Observer::update pure virtual method, called whenever the Network receives a SmartData-related message
     void update(typename Network::Observed * obs, const typename Network::Observed::Observing_Condition & cond, Buffer * buffer) {
 
         db<SmartData>(TRC) << "SmartData[R]::update(obs=" << obs << ",cond=" << cond << ",buf=" << buffer << ")" << endl;
+        
         Header * header = buffer->frame()->template data<Header>();
         switch(header->type()) {
         case INTEREST: {
@@ -1122,6 +1136,7 @@ private:
         case RESPONSE: {
             Response * response = reinterpret_cast<Response *>(header);
             db<SmartData>(INF) << "SmartData[R]::update:msg=" << *response << endl;
+            
             db<SmartData>(INF) << "SmartData[R]::update: not interested!" << endl;
         } break;
         case COMMAND: {
@@ -1290,8 +1305,9 @@ public:
     : _mode(mode), _region(region), _device(device), _uncertainty(uncertainty), _expiry(expiry), _period(period), _value(0), _predictor((predictive && (mode & PREDICTIVE)) ? new /*(SYSTEM)*/ Predictor : 0), _link(this) {
         db<SmartData>(TRC) << "SmartData[I](r=" << region << ",d=" << device << ",x=" << expiry << ",m=" << ((mode & ALL) ? "ALL" : "SGL") << ",err=" << int(uncertainty) << ",p=" << period << ")=>" << this << endl;
         _interests.insert(&_link);
+        db<SmartData>(TRC) << "SmartData[I] interests size: " << this->_interests.size() << endl;
         Network::attach(this, UNIT);
-        process(ANNOUNCE);
+        process(ANNOUNCE); 
         db<SmartData>(INF) << "SmartData[I]::this=" << this << "=>" << *this << endl;
     }
 
@@ -1324,6 +1340,7 @@ public:
             else
                 // Remote data sources should have sent messages timely, thus triggering update()
                 db<SmartData>(WRN) << "SmartData[I]::value(this=" << this << ",t=" << _response.time() + _expiry << ",v=" << _value << ") => expired!" << endl;
+                
         }
         return _value;
     }
@@ -1409,6 +1426,7 @@ private:
         case RESPONSE: {
             Response * response = buffer->frame()->template data<Response>();
             db<SmartData>(INF) << "SmartData[I]::update:msg=" << *response << endl;
+            //NOTE: não entra nesse if aqui
             if((response->unit() == UNIT) && _region.contains(response->origin())) {
                 if((response->operation()) == ADVERTISE)
                     process(ANNOUNCE);

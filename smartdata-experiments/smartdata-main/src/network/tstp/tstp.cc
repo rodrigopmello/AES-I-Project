@@ -81,9 +81,10 @@ void TSTP::update(NIC_Family::Observed * obs, const Protocol & prot, Buffer * bu
 
     Packet * packet = buf->frame()->data<Packet>();
     db<TSTP>(INF) << "TSTP::update:packet=" << *packet << endl;
-
+    //interpretação dos pacotes está errada
     _parts.notify(buf);
-
+    
+    //não detecta que é destinado para mim
     if(buf->destined_to_me)
         _clients.notify(packet->header()->unit(), buf);
 }

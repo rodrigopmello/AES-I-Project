@@ -6,6 +6,16 @@
 #include <utility/debug.h>
 #include <pthread.h>
 #include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
+
+
 
 extern char* globalIPAddress;
 
@@ -59,12 +69,26 @@ public:
 
 		_socket = socket(AF_INET, SOCK_DGRAM, 0);
 
+		struct sockaddr_in servaddr, cliaddr;
 		memset(&_servaddr, '\0', sizeof(sockaddr));
 		_servaddr.sin_family = AF_INET;
 		_servaddr.sin_addr.s_addr = INADDR_ANY;
 		_servaddr.sin_port = htons(5000);
-		bind(_socket, (struct sockaddr *)&_servaddr, sizeof(sockaddr));
+		int r = bind(_socket, (struct sockaddr *)&_servaddr, sizeof(sockaddr));
+		char buffer[1024];
+		socklen_t len;
+
+
+		// db<UDPNIC>(TRC) << "UDPNIC bind result "<< r << endl;
+
+		// int n = recvfrom(_socket, (char *)buffer, 1024, 
+        //         MSG_WAITALL, ( struct sockaddr *) &cliaddr,
+        //         &len);
+        // buffer[n] = '\0';
+        // printf("Client : %s\n", buffer);
 		
+		// rcv_thread(this);
+
 		FD_ZERO(&_fd);
 		FD_SET(_socket, &_fd);
 
@@ -73,6 +97,7 @@ public:
 		_remoteAddress.sin_addr.s_addr = inet_addr(globalIPAddress);
 
 		create_receive_thread();
+
 	}
 
 #ifndef NULL
@@ -86,11 +111,14 @@ public:
 		fd_set writefd;
 		memcpy(&writefd, &_fd, sizeof(fd_set));
 		struct timeval timeout;
-		timeout.tv_sec = 0;
+		timeout.tv_sec = 5;
 		timeout.tv_usec = 0;
+		
 		if (select(_socket + 1, NULL, &writefd, NULL, &timeout) > 0)
 		{
-			db<UDPNIC>(TRC) << "sendto size=" << size << ", data=" << data << endl;
+			// db<UDPNIC>(TRC) << "sendto size=" << size << ", data=" << data << endl;
+			// data = "";
+			
 			sendto(_socket, data, size, 0, (struct sockaddr *)&_remoteAddress,
 				sizeof(_remoteAddress));
 			return size;
@@ -100,27 +128,31 @@ public:
 	}
 	virtual int receive(Address * src, Protocol * prot, void * data, unsigned int size)
 	{
-		db<UDPNIC>(TRC) << "UDPNIC::receive(s=" /*<< *src << ",p=" << hex << *prot << dec*/ << ",d=" << data << ",s=" << size << ") => " << endl;
+		// db<UDPNIC>(TRC) << "UDPNIC::receive(s=" /*<< *src << ",p=" << hex << *prot << dec*/ << ",d=" << data << ",s=" << size << ") => " << endl;
 
-		Buffer * buf;
-		for (buf = 0; !buf; ++_rx_cur_consume %= RX_BUFS) { // _xx_cur_xxx are simple accelerators to avoid scanning the ring buffer from the beginning.
-														   // Losing a write in a race condition is assumed to be harmless. The FINC + CAS alternative seems too expensive.
-			unsigned int idx = _rx_cur_consume;
-			if (_rx_bufs[idx]->lock()) {
-				if (_rx_bufs[idx]->size() > 0)
-					buf = _rx_bufs[idx];
-				else
-					_rx_bufs[idx]->unlock();
-			}
-		}
+		Buffer * buf = alloc(address(), *prot, 0, 0, size);
+		// for (buf = 0; !buf; ++_rx_cur_consume %= RX_BUFS) { // _xx_cur_xxx are simple accelerators to avoid scanning the ring buffer from the beginning.
+		// 												   // Losing a write in a race condition is assumed to be harmless. The FINC + CAS alternative seems too expensive.
+		// 	unsigned int idx = _rx_cur_consume;
+		// 	if (_rx_bufs[idx]->lock()) {
+		// 		if (_rx_bufs[idx]->size() > 0)
+		// 			buf = _rx_bufs[idx];
+		// 		else
+		// 			_rx_bufs[idx]->unlock();
+		// 	}
+		// }
 
 		Address dst;
+		
 
 		unsigned int ret = 0;
+		// buf->fill(size, data);
+		
+		//memcpy(buf->frame(), data, size);
 
-		memcpy(data, buf->frame()->data<Frame>(), (buf->size() < size ? buf->size() : size));
-
-		free(buf);
+		db<UDPNIC>(TRC) << "UDPNIC::receive(s= buffer data " /*<< *src << ",p=" << hex << *prot << dec*/ << buf << endl;
+		notify(*prot, buf);
+		// free(buf);
 
 		return ret;
 	}
@@ -147,8 +179,8 @@ public:
 	}
 	virtual int send(Buffer * buf)
 	{
-		db<UDPNIC>(TRC) << "UDPNIC::send(buf=" << buf << ",frame=" << buf->frame() << " => " << *(buf->frame()) << endl;
-		return send(address(), NIC::PROTO_IP, buf->link(), buf->size());
+		db<UDPNIC>(TRC) << "UDPNIC::send(buf=" << buf << ",frame=" << buf->frame() << " => " << *(buf->frame()) << endl;		
+		return send(address(), NIC::Ethernet::MTU, buf->frame()->data<void*>(), buf->size());
 	}
 
 	virtual void free(Buffer * buf)
@@ -195,26 +227,32 @@ public:
 		pthread_attr_t attr;
 		pthread_attr_init(&attr);
 		pthread_t threadHandle;
-		pthread_create(&threadHandle, &attr, receive_thread, this);
+		int result = pthread_create(&threadHandle, &attr, receive_thread, this);		
 		pthread_attr_destroy(&attr);
 	}
 
-	void data_received(const char* data, int size)
+	
+
+	void data_received(void* data, int size)
 	{
+		db<UDPNIC>(TRC) << "data_received()" << endl;
+		Protocol prot = PROTO_TSTP;
+		Buffer* buf = new Buffer(this, 0);
+
+		//buf->size(size);
+		buf->fill(size, address(), address(), prot, reinterpret_cast<const void *>(data), size);
+		//memcpy(buf, data, size);
+
+		db<UDPNIC>(TRC) << "buf=" << *buf->frame() << endl;
+
+		notify(prot, buf);
+		//free(buf);
 		
+
 		
-		db<UDPNIC>(TRC) << "dummy data received - problem below!" << endl;
-
-		// Protocol prot = PROTO_TSTP;
-		// Buffer* buf = new Buffer(this, 0);
-
-		// buf->size(size);
-
-		// // buf->fill(size, data);
-		// memcpy(buf, data, size);
-
-		// notify(prot, buf);
 	}
+
+	
 
 	static void* receive_thread(void* p)
 	{
@@ -232,34 +270,39 @@ public:
 		// servaddr.sin_family = AF_INET;
 		// servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
 		// servaddr.sin_port = htons(5001);
-		// bind(udpnic->_socket, (struct sockaddr *)&servaddr, sizeof(sockaddr));
+		// bind(_socket, (struct sockaddr *)&servaddr, sizeof(sockaddr));
 
 		// FD_ZERO(&_fd);
 		// FD_SET(_socket, &_fd);
 
 		while (true)
 		{
+			db<UDPNIC>(TRC) << "reading thread" << endl;
 			struct timeval timeout;
-			timeout.tv_sec = 1;
+			timeout.tv_sec = 5;
 			timeout.tv_usec = 0;
 			fd_set readfd;
 			memcpy(&readfd, &_fd, sizeof(fd_set));
-			char data[2048];
-			int size = 2048;
+			char data[NIC::Ethernet::MTU];
+			int size =  NIC::Ethernet::MTU;
+			//address(), NIC::PROTO_IP, buf->link(), buf->size()
+			// db<UDPNIC>(TRC) << "reading thread 2 - " << endl;
+			// int ret = recvfrom(_socket, data, size, 0, NULL, NULL);
+			// db<UDPNIC>(TRC) << ret << endl;
 			socklen_t len;
 
 			int ret = recvfrom(udpnic->_socket, data, size, 
 					MSG_WAITALL, (struct sockaddr *) &udpnic->_remoteAddress,
 					&len);
+
 			if (ret > 0){
-				udpnic->data_received(data, size);
-			}					
-			// if (select(_socket + 1, &readfd, NULL, NULL, &timeout) > 0)
-			// {
-			// 	int ret = recvfrom(_socket, data, size, 0, NULL, NULL);
-			// 	if (ret > 0)
-			// 		udpnic->data_received(data, size);
-			// }
+					Protocol prot = NIC::Ethernet::MTU;
+					db<UDPNIC>(TRC) << "data size " << sizeof(data) << endl;
+					
+					//udpnic->receive(&udpnic->_configuration.address, &prot, data, size);
+					udpnic->data_received(data, size);
+			}
+			
 		}
 	}
 

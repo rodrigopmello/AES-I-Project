@@ -217,7 +217,7 @@ public:
         bool notified = false;
 
         db<Observers>(TRC) << "Data_Observed::notify(this=" << this << ",cond=" << c << ",obss= " << _observers.size() << ")" << endl;
-
+        //parei aqui
         for(Element * e = _observers.head(); e; e = e->next()) {
             if(e->rank() == c) {
                 db<Observers>(INF) << "Data_Observed::notify(this=" << this << ",obs=" << e->object() << ")" << endl;
@@ -225,7 +225,6 @@ public:
                 notified = true;
             }
         }
-
         return notified;
     }
 
