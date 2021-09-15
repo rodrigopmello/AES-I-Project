@@ -159,9 +159,9 @@ public:
             // Switches
             Switch                  = Digital_Unit<       0,       0,        1>::UNIT,
             On_Off                  = Switch,
-
+            Roadside_Data           = Digital_Unit<       0,       0,        4>::UNIT,
             // RFIDs and SmartCartds
-            RFID32                  = Digital_Unit<       1,       0,        4>::UNIT,
+            RFID32                  = Digital_Unit<       1,       0,        5>::UNIT,
 
             // Audio and Video (from RTP)                                       A/V         Hz        Ch       Ref
             PCMU                    = Digital_Unit<       2,       0,        0>::UNIT, // A         8000        1       [RFC3551]
@@ -222,7 +222,7 @@ public:
                     typename IF<((unsigned long)(UNIT & SID) == DIGITAL) && ((unsigned long)(UNIT & LEN) == 1),   char,
                     typename IF<((unsigned long)(UNIT & SID) == DIGITAL) && ((unsigned long)(UNIT & LEN) == 2),   short,
                     typename IF<((unsigned long)(UNIT & SID) == DIGITAL) && ((unsigned long)(UNIT & LEN) == 4),   long,
-                    typename IF<((unsigned long)(UNIT & SID) == DIGITAL) && ((unsigned long)(UNIT & LEN) > 0),    char[UNIT & LEN],
+                    typename IF<((unsigned long)(UNIT & SID) == DIGITAL) && ((unsigned long)(UNIT & LEN) > 0),    unsigned long,
                     void>::Result>::Result>::Result>::Result>::Result>::Result>::Result>::Result Type;
         };
 

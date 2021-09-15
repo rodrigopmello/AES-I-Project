@@ -34,7 +34,7 @@ public:
     void power(const Power_Mode & mode) {}
 };
 
-class Dummy_Transducer: public Transducer<SmartData::Unit::Antigravity>
+class Dummy_Transducer: public Transducer<SmartData::Unit::I64>
 {
     friend Responsive_SmartData<Dummy_Transducer>;
 
@@ -46,7 +46,11 @@ public:
 public:
     Dummy_Transducer(const Device_Id & dev): _value(0) {}
 
-    virtual Value sense() { return _value++; }
+    virtual Value sense() { 
+        //atualizar dados do value com base no que é lido da memória
+        _value = 0x6d28612c3129;        
+        return _value; 
+    }
     virtual void actuate(const Value & value) { _value = value; }
 
 private:

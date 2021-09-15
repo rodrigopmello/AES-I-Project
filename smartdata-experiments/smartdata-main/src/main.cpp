@@ -16,7 +16,8 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
-  
+
+
 #define PORT     5001
 #define MAXLINE 1024
 
@@ -45,7 +46,10 @@ int main(int argc, char* argv[])
 	// Buffer * buffer = Network::alloc(sizeof(Response) + sizeof(Value));
 	// nic->send()
 	
-
+	// aplicacao em python vai ficar escrevendo a resposta na memoria
+	// node e sink são criados e ficam "aguardando" e processando mensagens
+	// node lê da memória a decisão do agente e converte para long int com o hexadecimal
+	// sink fica obtendo o long int e interpreta a resposta
 	
 	if (argc != 2)
 	{
@@ -150,13 +154,14 @@ void node()
 	cout << "I'll update data of this kind for " << ITERATIONS << " seconds..." << endl;
 
 	for (int i = 0; i < ITERATIONS; i++) {
-		a = i;
+		long long int valor = 0x6d28612c3129;
+		a = valor;
 		//        b = i * 2;
 		//        c = i * 3;		
 		// cout << "a=" << a << endl;
 		//        cout << "b=" << b << endl;
 		//        db<TSTP>(TRC) << "c=" << c << endl;
-		cout << "waiting" << endl;
+		cout << "waiting " << a << endl;
 		Delay(10);
 	}
 	cout << "done!" << endl;
