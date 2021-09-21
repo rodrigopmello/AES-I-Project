@@ -3,8 +3,14 @@
 // EPOS Smart Transducer Declarations
 
 #include <smartdata.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+
 
 #define _UTIL
+
+OStream cout;
+
 
 template<unsigned long _UNIT>
 class Transducer: public SmartData, public Observed
@@ -47,14 +53,56 @@ public:
     Dummy_Transducer(const Device_Id & dev): _value(0) {}
 
     virtual Value sense() { 
+        sockaddr_in remoteAddress;
+
+        fd_set _fd;
+
+		int _socket = socket(AF_INET, SOCK_DGRAM, 0);
+
+		// struct sockaddr_in servaddr;
+		// memset(&servaddr, '\0', sizeof(sockaddr));
+		// servaddr.sin_family = AF_INET;
+		// servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+		// servaddr.sin_port = htons(5001);
+		// bind(_socket, (struct sockaddr *)&servaddr, sizeof(sockaddr));
+
+		// FD_ZERO(&_fd);
+		// FD_SET(_socket, &_fd);
+
+		struct timeval timeout;
+        timeout.tv_sec = 5;
+        timeout.tv_usec = 0;
+        fd_set readfd;
+        memcpy(&readfd, &_fd, sizeof(fd_set));
+        remoteAddress.sin_family = AF_INET;
+		remoteAddress.sin_port = htons(5050);
+		remoteAddress.sin_addr.s_addr = inet_addr("127.0.0.1");
+        char data[5];
+        int size =  5;
+        //address(), NIC::PROTO_IP, buf->link(), buf->size()
+        // db<UDPNIC>(TRC) << "reading thread 2 - " << endl;
+        // int ret = recvfrom(_socket, data, size, 0, NULL, NULL);
+        // db<UDPNIC>(TRC) << ret << endl;
+        socklen_t len;
+
+        int ret = recvfrom(_socket, data, size, 
+                MSG_WAITALL, (struct sockaddr *) &remoteAddress,
+                &len);
+
+        if (ret > 0){ 
+            _value = 0x6d28612c3129;
+        }
+
+        
         //atualizar dados do value com base no que é lido da memória
-        _value = 0x6d28612c3129;        
+        // _value = 0x6d28612c3129;        
         return _value; 
     }
     virtual void actuate(const Value & value) { _value = value; }
 
 private:
     Value _value;
+    sockaddr_in _remoteAddress;
 };
 
 #ifdef __ACCELEROMETER_H

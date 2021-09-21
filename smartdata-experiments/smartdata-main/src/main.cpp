@@ -47,6 +47,7 @@ int main(int argc, char* argv[])
 	// nic->send()
 	
 	// aplicacao em python vai ficar escrevendo a resposta na memoria
+	
 	// node e sink são criados e ficam "aguardando" e processando mensagens
 	// node lê da memória a decisão do agente e converte para long int com o hexadecimal
 	// sink fica obtendo o long int e interpreta a resposta
@@ -123,7 +124,7 @@ void sink()
 	cout << "I'm interested on " << SmartData::Unit(a.unit()) << endl;
 	cout << "I'll wait for data of this kind for " << ITERATIONS << " seconds..." << endl;
 	for (int i = 0; i < ITERATIONS + 5; i++) {
-		cout << "a=" << a << endl;
+		cout << "a=" << a << endl; //escreve resultado em socket UDP
 		//server();
 		Delay(10);
 	}
@@ -154,7 +155,7 @@ void node()
 	cout << "I'll update data of this kind for " << ITERATIONS << " seconds..." << endl;
 
 	for (int i = 0; i < ITERATIONS; i++) {
-		long long int valor = 0x6d28612c3129;
+		long long int valor = 0x6d28612c3130;
 		a = valor;
 		//        b = i * 2;
 		//        c = i * 3;		
