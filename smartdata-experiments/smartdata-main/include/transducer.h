@@ -9,7 +9,7 @@
 
 #define _UTIL
 
-OStream cout;
+
 
 
 template<unsigned long _UNIT>
@@ -50,46 +50,50 @@ public:
     static const Type TYPE = SENSOR | ACTUATOR;
 
 public:
-    Dummy_Transducer(const Device_Id & dev): _value(0) {}
+    Dummy_Transducer(const Device_Id & dev): _value(0) {
+        if ( (sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {
+            perror("socket creation failed");
+            exit(EXIT_FAILURE);
+        }
+        
+        memset(&servaddr, 0, sizeof(servaddr));
+        memset(&cliaddr, 0, sizeof(cliaddr));
+
+        // Filling server information
+        servaddr.sin_family    = AF_INET; // IPv4
+        servaddr.sin_addr.s_addr = INADDR_ANY;
+        servaddr.sin_port = htons(5050);
+
+        // Bind the socket with the server address
+        if ( bind(sockfd, (const struct sockaddr *)&servaddr, 
+                sizeof(servaddr)) < 0 )
+        {
+            perror("bind failed");
+            exit(EXIT_FAILURE);
+        }
+
+
+
+
+    }
 
     virtual Value sense() { 
-        sockaddr_in remoteAddress;
 
-        fd_set _fd;
+        
+        char buffer[1024];        
+        int n = 0;
 
-		int _socket = socket(AF_INET, SOCK_DGRAM, 0);
-
-		// struct sockaddr_in servaddr;
-		// memset(&servaddr, '\0', sizeof(sockaddr));
-		// servaddr.sin_family = AF_INET;
-		// servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
-		// servaddr.sin_port = htons(5001);
-		// bind(_socket, (struct sockaddr *)&servaddr, sizeof(sockaddr));
-
-		// FD_ZERO(&_fd);
-		// FD_SET(_socket, &_fd);
-
-		struct timeval timeout;
-        timeout.tv_sec = 5;
-        timeout.tv_usec = 0;
-        fd_set readfd;
-        memcpy(&readfd, &_fd, sizeof(fd_set));
-        remoteAddress.sin_family = AF_INET;
-		remoteAddress.sin_port = htons(5050);
-		remoteAddress.sin_addr.s_addr = inet_addr("127.0.0.1");
-        char data[5];
-        int size =  5;
-        //address(), NIC::PROTO_IP, buf->link(), buf->size()
-        // db<UDPNIC>(TRC) << "reading thread 2 - " << endl;
-        // int ret = recvfrom(_socket, data, size, 0, NULL, NULL);
-        // db<UDPNIC>(TRC) << ret << endl;
         socklen_t len;
+    
+        len = sizeof(cliaddr);  //len is value/resuslt
+        n = recvfrom(sockfd, (char *)buffer, 1024, 
+                    MSG_DONTWAIT, ( struct sockaddr *) &cliaddr,
+                    &len);
+        buffer[n] = '\0';
 
-        int ret = recvfrom(_socket, data, size, 
-                MSG_WAITALL, (struct sockaddr *) &remoteAddress,
-                &len);
 
-        if (ret > 0){ 
+    
+        if (n > 0){ 
             _value = 0x6d28612c3129;
         }
 
@@ -102,7 +106,8 @@ public:
 
 private:
     Value _value;
-    sockaddr_in _remoteAddress;
+    sockaddr_in servaddr, cliaddr;
+    int sockfd;
 };
 
 #ifdef __ACCELEROMETER_H
