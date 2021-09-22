@@ -10,6 +10,7 @@
 #include <utility/geometry.h>
 #include <utility/observer.h>
 #include <utility/predictor.h>
+#include <new>
 
 // agent -> smart_data(decision) -> applicacao (interpreta smart data) -> applicacao 2 (vai escrever no CARLA)
 

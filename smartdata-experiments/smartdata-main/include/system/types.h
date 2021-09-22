@@ -35,8 +35,8 @@ enum Power_Mode
 //    void free(void *);
 //}
 
-inline void * operator new(size_t s, void * a) { return a; }
-inline void * operator new[](size_t s, void * a) { return a; }
+// inline void * operator new(size_t s, void * a) { return a; }
+// inline void * operator new[](size_t s, void * a) { return a; }
 //
 //void * operator new(size_t, const EPOS::System_Allocator &);
 //void * operator new[](size_t, const EPOS::System_Allocator &);

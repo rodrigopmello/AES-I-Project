@@ -3,15 +3,12 @@
 #include <network/tstp/tstp.h>
 #include <transducer.h>
 #include <smartdata.h>
-#include <unistd.h>
-#include <string.h>
+
 // #include <machine/udpnic.h>
 // #include <network/tstp/tstp.h>
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
+
+
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
@@ -19,14 +16,11 @@
 
 
 
-
-
-
-
 #define PORT     5001
 #define MAXLINE 1024
 
-
+// std::stringstream ss;
+ 
 static const int ITERATIONS = 10;
 
 #define Delay sleep
@@ -43,6 +37,8 @@ void sink();
 void Usage();
 void node();
 void server();
+
+// using namespace std;
 
 int main(int argc, char* argv[])
 {

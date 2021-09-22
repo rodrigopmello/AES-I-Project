@@ -6,6 +6,12 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
+#include <unistd.h>
+#include <string.h>
+#include <stdlib.h>
+
+
+
 
 #define _UTIL
 
@@ -77,22 +83,25 @@ public:
 
     }
 
+    
     virtual Value sense() { 
 
-        
-        char buffer[1024];        
+        char buffer[12];        
         int n = 0;
 
         socklen_t len;
     
-        len = sizeof(cliaddr);  //len is value/resuslt
-        n = recvfrom(sockfd, (char *)buffer, 1024, 
+        len = sizeof(cliaddr);
+        n = recvfrom(sockfd, (char *)buffer, 12, 
                     MSG_DONTWAIT, ( struct sockaddr *) &cliaddr,
                     &len);
         buffer[n] = '\0';
-
-
-    
+        OStream os;
+        os << buffer;
+        // unsigned long long v;
+        // memcpy(&v, &buffer, 12);
+        
+        
         if (n > 0){ 
             _value = 0x6d28612c3129;
         }
@@ -108,6 +117,7 @@ private:
     Value _value;
     sockaddr_in servaddr, cliaddr;
     int sockfd;
+   
 };
 
 #ifdef __ACCELEROMETER_H
