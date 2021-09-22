@@ -7,8 +7,11 @@
 #include <arpa/inet.h>
 
 #include <unistd.h>
-#include <string.h>
+#include <string>
 #include <stdlib.h>
+
+#include <sstream>
+#include <bits/stdc++.h>
 
 
 
@@ -83,6 +86,25 @@ public:
 
     }
 
+    std::string hexToASCII(std::string hex)
+    {
+        // initialize the ASCII code string as empty.
+        std::string ascii = "";
+        for (size_t i = 0; i < hex.length(); i += 2)
+        {
+            // extract two characters from hex string
+            std::string part = hex.substr(i, 2);
+            
+            // change it into base 16 and
+            // typecast as the character
+            char ch = std::stoul(part, nullptr, 16);
+            
+            // add this char to final ASCII string
+            ascii += ch;
+        }
+            return ascii;
+    }
+
     
     virtual Value sense() { 
 
@@ -96,18 +118,37 @@ public:
                     MSG_DONTWAIT, ( struct sockaddr *) &cliaddr,
                     &len);
         buffer[n] = '\0';
-        OStream os;
-        os << buffer;
-        // unsigned long long v;
-        // memcpy(&v, &buffer, 12);
+        const char* tempBuf = (char*) buffer;
+
+        std::stringstream ss;
+
+        const char* it = tempBuf;
+        const char* end = tempBuf + std::strlen(tempBuf);
+
+        for (; it != end; ++it)
+            ss << std::hex << unsigned(*it);
+
+        long long int result;
         
+        ss >> result;
+        std::string hexString = ss.str();
+        
+        std::cout << "Hex value: " << std::hex << ss.str() << std::endl;
+
+        long long int number = (long long int)strtoll(hexString.c_str(), NULL, 16);
+    
+        std::cout << "Hex number: " << number << std::endl;
+
+        std::cout << "Hex text: " << hexToASCII(hexString) << std::endl;
         
         if (n > 0){ 
-            _value = 0x6d28612c3129;
+            std::cout <<  "Valor sobrescrito " << number << std::endl;
+            _value = number;
         }
 
+        n = 0;
         
-        //atualizar dados do value com base no que é lido da memória
+        
         // _value = 0x6d28612c3129;        
         return _value; 
     }

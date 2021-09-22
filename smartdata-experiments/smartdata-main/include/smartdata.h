@@ -11,6 +11,7 @@
 #include <utility/observer.h>
 #include <utility/predictor.h>
 #include <new>
+#include <string>
 
 // agent -> smart_data(decision) -> applicacao (interpreta smart data) -> applicacao 2 (vai escrever no CARLA)
 
@@ -160,7 +161,7 @@ public:
             // Switches
             Switch                  = Digital_Unit<       0,       0,        1>::UNIT,
             On_Off                  = Switch,
-            Roadside_Data           = Digital_Unit<       0,       0,        4>::UNIT,
+            Roadside_Data           = Digital_Unit<       0,       0,        5>::UNIT,
             // RFIDs and SmartCartds
             RFID32                  = Digital_Unit<       1,       0,        5>::UNIT,
 
@@ -223,7 +224,7 @@ public:
                     typename IF<((unsigned long)(UNIT & SID) == DIGITAL) && ((unsigned long)(UNIT & LEN) == 1),   char,
                     typename IF<((unsigned long)(UNIT & SID) == DIGITAL) && ((unsigned long)(UNIT & LEN) == 2),   short,
                     typename IF<((unsigned long)(UNIT & SID) == DIGITAL) && ((unsigned long)(UNIT & LEN) == 4),   long,
-                    typename IF<((unsigned long)(UNIT & SID) == DIGITAL) && ((unsigned long)(UNIT & LEN) > 0),    unsigned long,
+                    typename IF<((unsigned long)(UNIT & SID) == DIGITAL) && ((unsigned long)(UNIT & LEN) > 0),    std::string,
                     void>::Result>::Result>::Result>::Result>::Result>::Result>::Result>::Result Type;
         };
 
