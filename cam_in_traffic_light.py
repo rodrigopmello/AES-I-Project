@@ -45,10 +45,22 @@ try:
     cam_bp.set_attribute("fov", "110")
 
     traffic_light_location = traffic_light.get_location()
-    tl_latitude, tl_longitude = traffic_light_location
+    vehicle_light_location = vehicle.get_location()
 
     # Check if both objects are close
-    traffic_light_hash = encode(tl_latitude, tl_longitude)
+    traffic_light_hash = encode(
+                            traffic_light_location.x
+                          , traffic_light_location.y
+                          , precision=5
+                          )
+    vehicle_light_hash = encode(
+                            vehicle_light_location.x
+                          , vehicle_light_location.y
+                          , precision=5
+                          )
+
+    if traffic_light_hash != vehicle_light_hash:
+        print("The objects are not in close to each other")
 
     # spawn_point = carla.Transform(carla.Location(x=2.5, z=0.7))
     spawn_point = carla.Transform(traffic_light_location)
